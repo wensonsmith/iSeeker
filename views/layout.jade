@@ -1,0 +1,21 @@
+doctype 5
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.min.css')
+	body
+		nav(role="navigation").navbar.navbar-default.navbar-fixed-top
+			.container
+				a(href="/").navbar-brand Title
+				ul.nav.navbar-nav
+					li.active
+						a(href="#") Home
+					li
+						a(href="#") Link
+
+		bts-na
+
+		block content
+		script(type='text/javascript',src='/javascripts/jquery.min.js')
+		script(type='text/javascript',src='/javascripts/bootstrap/bootstrap.min.js')
+		block script

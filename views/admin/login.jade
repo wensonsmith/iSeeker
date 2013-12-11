@@ -1,0 +1,12 @@
+extends ../header
+block css
+	link('rel'='stylesheet',href='/stylesheets/admin.css');
+block main
+	.container
+		.col-sm-6.col-sm-offset-3.login-box
+			form(action='', method='POST', role='form')
+				.form-group
+					label(for='password') Password
+					input(type="password", name="password", id="password", placeholder="Input Password").form-control
+				button.btn.btn-primary(type='submit') Submit 
+				
