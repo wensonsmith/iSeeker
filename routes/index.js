@@ -15,4 +15,5 @@ module.exports = function(app){
     app.get('/i',Admin.index);
     app.get('/i/login',Admin.login);
     app.get('/i/add',Admin.add);
+    app.post('/i/login',Admin._login);
 }

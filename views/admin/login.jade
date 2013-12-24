@@ -4,9 +4,28 @@ block css
 block main
 	.container
 		.col-sm-6.col-sm-offset-3.login-box
-			form(action='', method='POST', role='form')
+			form(action='', method='POST', role='form')#loginForm
 				.form-group
 					label(for='password') Password
 					input(type="password", name="password", id="password", placeholder="Input Password").form-control
-				button.btn.btn-primary(type='submit') Submit 
-				
+				button.btn.btn-primary(type='submit') Submit
+block bottom-script
+	script
+		$("#loginForm").submit(function(){
+			var password = $("#password").val();
+			if(password==''){
+				$("#password").css({"background-color":"#FF4444"});
+				return false;
+			}
+			$.ajax({
+				url:"login",
+				type:"POST",
+				data:{password:password},
+				success:function(data){
+					if(data.status == 1){
+						alert("YES");
+					};
+				}
+			})
+			return false;
+		})

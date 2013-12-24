@@ -1,17 +1,17 @@
 extends ../layout
 
 block content
-	h1= title
-	p Welcome to #{title}
-	#container.container.col-lg-5
-		#login
-			form.form-horizontal
-				.form-group
-					label.sr-only(for='email') Email
-					input#email.form-control(type='text' placeholder='Email')
+	div.jumbotron
+		.container
+			h1 Welcome
+			p 夕阳无限好，天色已黄昏
+			p
+				a.btn.btn-primary.btn-lg Enter
+	#container.container
+		.col-md-3
+			.list-group
+				a.list-group-item haha
+				a.list-group-item hehe
 
-				.form-group
-					label.sr-only(for='password') Password
-					input#password.form-control(type='password' placeholder='Password')
-
-				button.btn.btn-default(type='submit') Sign in
+		.col-md-9
+			!{s}
