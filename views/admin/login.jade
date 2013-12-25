@@ -10,7 +10,7 @@ block main
 					input(type="password", name="password", id="password", placeholder="Input Password").form-control
 				button.btn.btn-primary(type='submit') Submit
 block bottom-script
-	script
+	script.
 		$("#loginForm").submit(function(){
 			var password = $("#password").val();
 			if(password==''){
