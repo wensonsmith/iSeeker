@@ -4,8 +4,6 @@
  * @date 2013-12-11 16:20
  */
 
-
-
 exports.index = function(req,res){
     return res.json({"status":1});
 }
