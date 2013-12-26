@@ -13,13 +13,3 @@ exports.index = function(req,res){
     console.log(content);
     res.render('index',{s:content});
 }
-
-
-exports.googleVerify = function(req,res){
-    fs.readFile('google3f491a7ce2128d22.html', 'utf8', function(err, text){
-        if(err){
-            res.send(err);
-        }
-        res.send(text);
-    });
-}

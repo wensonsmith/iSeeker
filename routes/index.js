@@ -16,8 +16,4 @@ module.exports = function(app){
     app.get('/i/login',Admin.login);
     app.get('/i/add',Admin.add);
     app.post('/i/login',Admin._login);
-
-
-    //Google 的文件验证
-    app.get('/google3f491a7ce2128d22.html',Index.googleVerify);
 }
