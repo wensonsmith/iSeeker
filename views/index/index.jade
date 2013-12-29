@@ -1,17 +1,16 @@
-extends ../layout
+extends ../public/header
+
+block css
+	link(rel='stylesheet' href='/stylesheets/index.css')
 
 block content
-	div.jumbotron
-		.container
-			h1 Welcome
-			p 夕阳无限好，天色已黄昏
-			p
-				a.btn.btn-primary.btn-lg Enter
-	#container.container
-		.col-md-3
-			.list-group
-				a.list-group-item haha
-				a.list-group-item hehe
+	include ../public/sidebar
 
-		.col-md-9
-			!{s}
+	.content
+		.container
+			.col-md-8
+				div
+					h2 I am the title
+			.col-md-4
+				div
+					strong 2013.12.28

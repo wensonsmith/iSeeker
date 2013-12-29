@@ -1,8 +1,4 @@
 doctype html
-//if IE 8
-	|<html class="no-js lt-ie9">
-//if gt IE 8
-	|<!--> <html class="no-js"> <!--
 head
 	//- TODO: Check if it's the good charset
 	meta(charset='utf-8')
@@ -12,6 +8,7 @@ head
 	meta(name='viewport', content='width=device-width,initial-scale=1')
 	//- TODO : Place favicon.ico and apple-touch-icon.png in the root directory
 	link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.min.css')
+	link(rel='stylesheet', href='/stylesheets/bootstrap/google-style.min.css')
 	block css
 		//link(rel="stylesheet", href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css")
 	block top-script
@@ -21,10 +18,8 @@ head
 			script(src='htpp://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js')
 body
 	//- Add your site or application content here
-	block main
+	block content
 
 	script(src='/javascripts/jquery.min.js')
 	script(src="/javascripts/bootstrap/bootstrap.min.js")
 	block bottom-script
-
-		//script(src="http://cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js")
