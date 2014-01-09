@@ -11,5 +11,5 @@ exports.index = function(req,res){
 
     var content = MarkDown('###Hello World');
     console.log(content);
-    res.render('index',{s:content});
+    res.render('index/index',{s:content});
 }
