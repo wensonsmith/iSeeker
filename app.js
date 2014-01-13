@@ -8,19 +8,22 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var app = express();
-
 var MongoStore = require('connect-mongo')(express);
 var Settings = require('./settings');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
+
+//Template Engine
 app.set('view engine', 'html');
-app.engine('html', require('dot').__express);
-//app.use('view engine', 'html');
+app.engine('html', require('hogan-express'));
+//app.set('layout', 'layouts/default');
+//app.set('partials', {header: "includes/header"});
+//app.enable('view cache')
+
 app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.cookieParser());
