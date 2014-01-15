@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('hogan-express'));
 //app.set('layout', 'layouts/default');
-//app.set('partials', {header: "includes/header"});
+app.set('partials', {header: "partials/header"});
 //app.enable('view cache')
 
 app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
