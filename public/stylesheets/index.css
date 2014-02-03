@@ -1,6 +1,52 @@
+/*----Google Font API----*/
+
+@import url(http://fonts.googleapis.com/css?family=Ceviche+One);
+
+/*---------- 通用 ------------------------------------------------*/
+
+a{
+    text-decoration: none;
+    color: #333333;
+}
+
+.clearfix{
+
+}
+
+body{
+    background: url('../images/geometry.png') repeat ;
+    /*background-attachment: fixed;*/
+}
+
+
+/*---------- 头部 ---------------------------------------------- */
+
+.header{
+    text-align: center;
+}
+.logo-text{
+    font-family: 'Ceviche One', cursive;
+    font-size: 64px;
+    display: block;
+    margin-top:30px;
+}
+.header a:hover{
+    text-shadow: 0 0 5px #7A7A7A;
+}
+
+.title-main{
+    font-family: "Georgia";
+    font-style: italic;
+    color: #666;
+    text-shadow: 0 1px 1px #d9d9d9;
+}
+
+/*---------- 侧边栏 ---------------------------------------------- */
+
 .sidebar{
-    width: 250px;
-    background: url('../images/bg-content.png') repeat ;
+    width: 200px;
+    background-color: #353535;
+    /*background: url('../images/geometry_@2X.jpeg') repeat ;*/
     /*border-right: 1px solid #aaa;*/
     height: 100%;
     position: fixed;
@@ -11,19 +57,143 @@
 
 .logo img{
     height: 150px;
-    margin: 50px;
+    margin: 25px;
 }
 
-.nav-list{
-    float: right;
-    margin-right: 100px;
+.title-sub{
+    color: #fffbd5;
+    border-top: 1px seashell outset;
+    font-size: 12px;
+    width: 150px;
+    margin:0 auto;
+    text-align: center;
+    line-height: 25px;
+}
+
+nav ul {
+    color: #fffbd5;
+    line-height: 20px;
+    margin-right: 30px;
+    margin-top: 100px;
+    font-size: 0.7em;
     text-align: right;
-    line-height: 30px;
 }
 
-.content{
-    padding-top: 1px;
-    margin-left: 250px;
+nav ul li{
+    margin-top: 10px;
+
+}
+
+nav ul li.active{
+    border-left: 1px #d9d9d9 inset;
+}
+
+.about{
+    position: absolute;
+    bottom: 0;
+    color: #9b9b9b;
+    font-size: 12px;
+    text-align: center;
+    border-top: 1px solid #9b9b9b;
+    width: 150px;
+    left: 25px;
+    line-height: 50px;
+
+}
+
+.wrapper{
+    /*margin-top: 200px;*/
+    margin-left: 200px;
     height: 1200px;
+    overflow: hidden;
+    background: url("../images/headerline.png") repeat-x;
+
+    /*background: url('../images/lightpaperfibers.png') repeat;*/
     /*background: url('../images/bg-content.png') repeat ;*/
+}
+
+/*---------Content 内容-----------------------------*/
+
+
+.container{
+    /*margin-top: 120px;*/
+    margin:40px auto;
+    width: 800px;
+    /*background-color: #FFFFFF;*/
+    height: 800px;
+    /*margin-left: 20px;*/
+    /*box-shadow: 0px -20px 30px -30px #565656;*/
+}
+
+.article{
+    height: 350px;
+    /*border-top: 5px solid #C9A8D8;*/
+}
+
+
+.article .category{
+    height: 53px;
+    width: 80px;
+    float: left;
+    /*background-color: #f2f2f2;*/
+    background: url("../images/category.png") no-repeat;
+}
+
+.article .content{
+    width: 620px;
+    height: 100px;
+    /*margin-top: 38px;*/
+    float: left;
+    border-top: 3px solid;
+}
+.article .summary{
+    text-indent: 2em;
+    color: #565656;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.article .metadata{
+    /*margin-top: 10px;*/
+    width: 100px;
+    height: 100%;
+    float: left;
+    text-align: center;
+    background-color: #f2f2f2;
+    border-top: 3px solid;
+}
+
+.article .headline{
+    padding-left: 20px;
+    font-weight: bold;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.date .day{
+    font-size: 50px;
+    margin-top: 15px;
+}
+
+
+/*------- footer 底部 ------------*/
+
+footer{
+    margin: 80px auto 30px 200px;
+    text-align: center;
+    font-size: 12px;
+}
+
+footer .footer{
+    width: 500px;
+    color: #999999;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    line-height: 50px;
+    margin:0 auto;
+}
+
+footer .copyright{
+    color: #216f99;
+    margin-top: 5px;
 }
