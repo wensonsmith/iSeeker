@@ -11,9 +11,7 @@ exports.index = function(req,res){
 
     var content = MarkDown('###Hello World');
     console.log(content);
-    var viewParams = {hello:content,partials:{
-        sidebar:'partials/sidebar'
-    }}
+    var viewParams = {hello:content}
 
     res.render('index/index',viewParams);
 }
