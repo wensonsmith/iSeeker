@@ -32,6 +32,7 @@ app.use(app.router);
 routes(app);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use(express.session({
     secret:Settings.cookieSecret,
     store:new MongoStore({

@@ -5,7 +5,9 @@
  */
 
 exports.index = function(req,res){
-    return res.json({"status":1});
+    var viewParams = {partials:{sidebar: 'partials/sidebar'}}
+
+    res.render('admin/index',viewParams);
 }
 
 exports.login = function(req,res){
