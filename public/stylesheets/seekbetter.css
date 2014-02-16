@@ -8,14 +8,14 @@
 /*********************************************************************************/
 
 .seeker-logo{
-    width: 150px;
+    width: 120px;
     margin-top: 0.3em;
 }
 
 .seeker-title{
     font-family: 'Ceviche One', cursive;
     font-size: 3rem;
-    margin-top:1.2em;
+    margin-top:-0.3em;
 }
 
     .seeker-subtitle{
