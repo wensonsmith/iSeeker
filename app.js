@@ -15,6 +15,9 @@ var Settings = require('./settings');
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 
+//Enable Gzip compress
+app.use(express.compress());
+
 //Template Engine
 app.set('view engine', 'html');
 app.engine('html', require('hogan-express'));
