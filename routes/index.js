@@ -4,7 +4,7 @@
 
 var Index = require('../controllers/IndexController');
 var User  = require('../controllers/UserController');
-var Admin = require('../controllers/AdminController');
+var Auth = require('../controllers/AuthController');
 
 /**
  * Routers
@@ -12,8 +12,7 @@ var Admin = require('../controllers/AdminController');
 module.exports = function(app){
     app.get('/',Index.index);
     app.get('/u',User.index);
-    app.get('/i',Admin.index);
-    app.get('/i/login',Admin.login);
-    app.get('/i/add',Admin.add);
-    app.post('/i/login',Admin._login);
+    app.get('/x',Auth.index);
+    app.get('/x/door',Auth.index);
+    app.post('/x/unlock',Auth.unlock);
 }

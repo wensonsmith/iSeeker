@@ -1,8 +1,29 @@
-<!-- Header -->
-{{> header}}
+{{#yield-css}}
 
-<div id="main">
+{{/yield-css}}
+<div class="container">
     <div class="row">
-
+        <div class="-4u 4u">
+            <ul id="cube-unlock" class="login-box clearfix">
+                <li><div>1</div></li>
+                <li><div>2</div></li>
+                <li><div>3</div></li>
+                <li><div>4</div></li>
+                <li><div>5</div></li>
+                <li><div>6</div></li>
+                <li><div>7</div></li>
+                <li><div>8</div></li>
+                <li><div>9</div></li>
+            </ul>
+        </div>
+        <div class="4u login-box">
+        </ul>
     </div>
+    </div>
+
 </div>
+
+{{#yield-scripts}}
+<script src="/public/javascripts/jquery.dragsort-0.5.1.min.js"></script>
+<script src="/public/javascripts/X-door.js"></script>
+{{/yield-scripts}}

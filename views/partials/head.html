@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--Header Layout for Admin-->
+<html>
+<head>
+    <title>{{title}}</title>
+    <link href="/stylesheets/X.css" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/Boilerplate.css" rel="stylesheet" type="text/css">
+    {{{yield-css}}}
+</head>
+<body>
+
+{{{yield}}}
+
+<!-- Scripts -->
+<script src="/public/javascripts/jquery.min.js"></script>
+<script>
+    window._skel_config = {
+        prefix: "/public/stylesheets/X",
+        resetCSS: true,
+        normalizeCSS:true,
+        boxModel: "border",
+        grid: { gutters: 30 },
+        breakpoints: {
+            wide: { range: "1200-", containers: 1140, grid: { gutters: 40 } },
+            narrow: { range: "481-1199", containers: 960, grid: { gutters: 20 }},
+            mobile: { range: "-480", containers: "fluid", lockViewport: true, grid: { collapse: true } }
+        }
+    };
+</script>
+<script src="/public/javascripts/skel.min.js"></script>
+{{{yield-scripts}}}
+</body>
+</html>
