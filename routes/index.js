@@ -15,4 +15,5 @@ module.exports = function(app){
     app.get('/x',Auth.index);
     app.get('/x/door',Auth.index);
     app.post('/x/unlock',Auth.unlock);
+    app.get('/x/dashboard',Auth.dashboard);
 }

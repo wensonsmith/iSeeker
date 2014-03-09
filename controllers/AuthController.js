@@ -14,9 +14,16 @@ exports.index = function(req,res){
 }
 
 exports.unlock = function(req,res){
-    if(req.body.password == 'wensonsmith'){
-        return res.send({"status":1});
-    }else{
-        return res.send({"status":-1});
-    }
+    var key = 'FA13E2A8E29A11B0B8975476A8BA44BEX0X0';
+    var sequence = 'X0X0A8BA';
+    console.log(req.body.key);
+    if(req.body.key == key && req.body.sequence == sequence)
+        res.json({"status":1,"msg":"OK"});
+    else
+        res.json({"status":-1,"msg":"ERROR"});
+}
+
+exports.dashboard = function(req,res){
+    var viewParams = {welcome:"Welcome , My admin",title:"DashBoard"};
+    res.render('admin/dashboard',RH.xParam(viewParams));
 }
