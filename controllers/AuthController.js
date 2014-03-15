@@ -5,12 +5,11 @@
  * @date 2013-12-11 16:20
  */
 
-var RH = require('../Library/Utils/RenderHelper');
+var Render = require('../Library/Utils/RenderHelper');
 
 exports.index = function(req,res){
-    var viewParams = {hello:"nani luanqibazoaldlshdh",title:"DoorMan"};
-    console.log(RH.xParam(viewParams));
-    res.render('admin/index',RH.xParam(viewParams));
+    Render.setTitle("I am WatchDog");
+    res.render('admin/index',Render.xParam({}));
 }
 
 exports.unlock = function(req,res){
@@ -18,12 +17,19 @@ exports.unlock = function(req,res){
     var sequence = 'X0X0A8BA';
     console.log(req.body.key);
     if(req.body.key == key && req.body.sequence == sequence)
+    {
+        var user = {
+            key:key,
+            sequence:sequence
+        };
+        req.session.user = user;
         res.json({"status":1,"msg":"OK"});
-    else
+    }else
         res.json({"status":-1,"msg":"ERROR"});
 }
 
 exports.dashboard = function(req,res){
-    var viewParams = {welcome:"Welcome , My admin",title:"DashBoard"};
-    res.render('admin/dashboard',RH.xParam(viewParams));
+    var viewParams = {welcome:"Welcome , My admin"};
+    Render.setTitle('Dashboard');
+    res.render('admin/dashboard',Render.xParam(viewParams));
 }

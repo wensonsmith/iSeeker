@@ -4,14 +4,29 @@
  * @date 2014/3/6 下午 3:45
  */
 
+var preSet = {};
+
 exports.xParam = function(params){
-    var layout = {layout:'partials/head',partials:{sidebar:'partials/sidebar'}};
-    return  extend(params,layout,true);
+    preSet.layout = 'partials/head';
+
+    if(typeof params == 'undefined')
+        return preSet;
+    else
+        return  extend(params,preSet,true);
 }
 
 exports.iParam = function(params){
-    var layout = {layout:'partials/header',partials:{sidebar:'partials/sidebar'}};
-    return  extend(params,layout,true);
+    preSet.layout = 'partials/header';
+    preSet.partials = {sidebar:'partials/sidebar'} ;
+
+    if(typeof params == 'undefined')
+        return preSet;
+    else
+        return  extend(params,preSet,true);
+}
+
+exports.setTitle = function(name){
+    preSet.title = name;
 }
 
 /**

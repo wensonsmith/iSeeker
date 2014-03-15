@@ -22,7 +22,7 @@ app.use(express.compress());
 app.set('view engine', 'html');
 app.engine('html', require('hogan-express'));
 //app.set('layout', 'layouts/default');
-app.set('partials', {header: "partials/header"});
+//app.set('partials', {header: "partials/header"});
 //app.enable('view cache')
 
 app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
@@ -30,18 +30,23 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.cookieParser());
+
+//Enable Session
+app.use(express.session({
+    secret:Settings.cookieSecret,
+    store:new MongoStore({
+        db:Settings.db
+    })
+}));
+
+
 app.use(app.router);
 //app.get(app.user);
 routes(app);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public',express.static(path.join(__dirname, 'public')));
-app.use(express.session({
-    secret:Settings.cookieSecret,
-    store:new MongoStore({
-        db:Settings.db
-    })
-}))
+
 
 
 // development only
