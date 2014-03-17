@@ -7,8 +7,8 @@
 var preSet = {};
 
 exports.xParam = function(params){
-    preSet.layout = 'partials/head';
-
+    preSet.layout = 'partials/x/header';
+    preSet.partials = {sidebar:'partials/x/sidebar'};
     if(typeof params == 'undefined')
         return preSet;
     else
