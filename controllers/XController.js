@@ -7,11 +7,36 @@
 
 var Render = require('../Library/Utils/RenderHelper');
 
+/**
+ * 后台登陆页面
+ * @param req
+ * @param res
+ */
 exports.index = function(req,res){
-    Render.setTitle("I am WatchDog");
-    res.render('admin/index',Render.xParam({}));
+    res.render('x/index',Render.xParam({layout:null,partials:null}));
 }
 
+
+/**
+ * Dashboard 页面
+ * @param req
+ * @param res
+ */
+exports.dashboard = function(req,res){
+    var viewParams = {welcome:"Welcome , My admin"};
+    Render.setTitle('Dashboard');
+    res.render('x/dashboard',Render.xParam(viewParams));
+}
+
+
+
+
+
+/**
+ * 登陆验证
+ * @param req
+ * @param res
+ */
 exports.unlock = function(req,res){
     var key = 'FA13E2A8E29A11B0B8975476A8BA44BEX0X0';
     var sequence = 'X0X0A8BA';
@@ -28,8 +53,3 @@ exports.unlock = function(req,res){
         res.json({"status":-1,"msg":"ERROR"});
 }
 
-exports.dashboard = function(req,res){
-    var viewParams = {welcome:"Welcome , My admin"};
-    Render.setTitle('Dashboard');
-    res.render('admin/dashboard',Render.xParam(viewParams));
-}

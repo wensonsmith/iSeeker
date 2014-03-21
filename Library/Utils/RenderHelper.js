@@ -12,7 +12,7 @@ exports.xParam = function(params){
     if(typeof params == 'undefined')
         return preSet;
     else
-        return  extend(params,preSet,true);
+        return  extend(preSet,params,true);
 }
 
 exports.iParam = function(params){
@@ -22,7 +22,7 @@ exports.iParam = function(params){
     if(typeof params == 'undefined')
         return preSet;
     else
-        return  extend(params,preSet,true);
+        return  extend(preSet,params,true);
 }
 
 exports.setTitle = function(name){

@@ -55,7 +55,17 @@
 }
 
 .header{
-    height: 65px;
+    /*height: 65px;*/
     background-color: #1E293C;
     width: 100%;
+    color: #216f99;
+    line-height: 65px;
+    padding-left: 10px
 }
+
+   .header .logout{
+       width: 120px;
+       background-color: #EA304D;
+       color: #FFFFFF;
+       text-align: center
+    }
