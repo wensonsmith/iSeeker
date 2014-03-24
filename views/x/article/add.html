@@ -1,7 +1,27 @@
+{{#yield-css}}
+<link href="/public/stylesheets/editor/codemirror.css" rel="stylesheet" type="text/css">
+{{/yield-css}}
+
 <div class="container">
     <div class="row">
         <div class="12u">
-            Hello world!
+            <textarea id="code" >
+                Hello world!
+            </textarea>
         </div>
     </div>
 </div>
+
+{{#yield-scripts}}
+<script src="/public/javascripts/editor/marked.js"></script>
+<script src="/public/javascripts/editor/codemirror.js"></script>
+<script src="/public/javascripts/editor/mode/markdown/markdown.js"></script>
+<script src="/public/javascripts/editor/editor.js"></script>
+<script>
+    CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: 'markdown',
+        lineNumbers: true,
+        theme: "default"
+    });
+</script>
+{{/yield-scripts}}

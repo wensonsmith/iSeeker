@@ -7,8 +7,8 @@
 var preSet = {};
 
 exports.xParam = function(params){
-    preSet.layout = 'partials/x/header';
-    preSet.partials = {sidebar:'partials/x/sidebar'};
+    preSet.layout = 'x/partials/header';
+    preSet.partials = {sidebar:'x/partials/sidebar'};
     if(typeof params == 'undefined')
         return preSet;
     else
@@ -16,8 +16,8 @@ exports.xParam = function(params){
 }
 
 exports.iParam = function(params){
-    preSet.layout = 'partials/header';
-    preSet.partials = {sidebar:'partials/sidebar'} ;
+    preSet.layout = 'index/partials/header';
+    preSet.partials = {sidebar:'index/partials/sidebar'} ;
 
     if(typeof params == 'undefined')
         return preSet;
