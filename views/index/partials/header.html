@@ -1,46 +1,32 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/html">
-    <head>
-        <title>{{title}}</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="description" content="Wenson Smith's Blog . Record my lives" />
-        <meta name="keywords" content="iSeeker seekbetter wensonsmith" />
-        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css" />
-        <link href="/public/stylesheets/seekbetter.css" type="text/css" rel="stylesheet">
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <noscript>
-            <link rel="stylesheet" href="/public/stylesheets/skel-noscript.css" />
-            <link rel="stylesheet" href="/public/stylesheets/style.css" />
-            <link rel="stylesheet" href="/public/stylesheets/style-wide.css" />
-        </noscript>
-        <!--[if lte IE 9]><link rel="stylesheet" href="/public/stylesheets/ie9.css" /><![endif]-->
-        <!--[if lte IE 8]><link rel="stylesheet" href="/public/stylesheets/ie8.css" /><![endif]-->
-        {{{yield-css}}}
-    </head>
-    <body>
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="zh-cn" > <![endif]-->
+<html class="no-js" lang="zh-cn" >
 
-    {{{yield}}}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation 5</title>
 
-    <!-- Footer -->
-    <div id="footer">
-        <!-- Copyright -->
-        <div class="copyright">
-            <p>&copy; 2013 seekbetter.me & All rights reserved.</p>
-            <ul class="menu">
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                <li>由iSeeker强力驱动</li>
-            </ul>
-        </div>
+    <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+    <link rel="stylesheet" href="/public/stylesheets/normalize.css">
+    <link rel="stylesheet" href="/public/stylesheets/foundation.min.css">
 
-    </div>
+    <!-- Font CSS -->
+    <link rel="stylesheet" href="/public/stylesheets/font/typicons.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css">
+
+    <!-- If you are using the gem version, you need this only -->
+    <link rel="stylesheet" href="/public/stylesheets/seekbetter.css">
+    {{{yield-css}}}
+
+</head>
+<body>
+
+<!-- body content here -->
+{{{yield}}}
 
 
-    <!-- Scripts -->
-    <script src="/public/javascripts/jquery.min.js"></script>
-    <script src="/public/javascripts/skel.min.js"></script>
-    <script src="/public/javascripts/skel-panels.min.js"></script>
-    <script src="/public/javascripts/init.js"></script>
-    {{{yield-scripts}}}
-
-    </body>
+{{{yield-script}}}
+<script data-main="/public/javascripts/main" src="/public/javascripts/components/requirejs/require.js"></script>
+</body>
 </html>
