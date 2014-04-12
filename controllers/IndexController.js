@@ -13,7 +13,7 @@ exports.index = function(req,res){
     var content = MarkDown('###Hello World');
     console.log(content);
     var viewParams = {hello:content};
-    console.log(Render.iParam());
+    console.log(Render.setView());
 
-    res.render('index/index',Render.iParam());
+    res.render('index/index',Render.setView());
 }

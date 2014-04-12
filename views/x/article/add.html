@@ -1,21 +1,28 @@
 {{#yield-css}}
 <link href="/public/stylesheets/editor/codemirror.css" rel="stylesheet" type="text/css">
 <link href="/public/stylesheets/editor/markdown.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/public/javascripts/components/codemirror/addon/dialog/dialog.css" rel="stylesheet" type="text/css">
 {{/yield-css}}
 
-<div class="container">
-    <div class="row">
-        <div class="6u">
-            <textarea id="editor" data-preview="#preview">
-                Hello world!
-            </textarea>
-        </div>
-        <div id="preview" class="6u markdown-body">
+{{> sidebar}}
 
+<div class="container"">
+
+    {{> navigation}}
+
+    <div class="wrapper">
+        <div id="md-input">
+            <textarea id="editor" data-preview="#md-preview" style="display: none"></textarea>
         </div>
+        <div id="md-preview" class="markdown"></div>
     </div>
-</div>
 
-{{#yield-scripts}}
-<script data-main="/public/javascripts/editor/editor" src="/public/javascripts/components/requirejs/require.js"></script>
-{{/yield-scripts}}
+{{#yield-script}}
+<script>
+    require(['main'],function(){
+        require(['jquery','modules/editor/MEditor'],function($,MEditor){
+            MEditor.init($("#editor"));
+        })
+    })
+</script>
+{{/yield-script}}

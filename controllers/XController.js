@@ -13,7 +13,7 @@ var Render = require('../Library/Utils/RenderHelper');
  * @param res
  */
 exports.index = function(req,res){
-    res.render('x/index',Render.xParam({layout:null,partials:null}));
+    res.render('x/index',Render.setView(null,true));
 }
 
 
@@ -25,7 +25,7 @@ exports.index = function(req,res){
 exports.dashboard = function(req,res){
     var viewParams = {welcome:"Welcome , My admin"};
     Render.setTitle('Dashboard');
-    res.render('x/dashboard',Render.xParam(viewParams));
+    res.render('x/dashboard',Render.setView(viewParams,true));
 }
 
 

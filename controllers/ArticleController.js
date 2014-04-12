@@ -12,9 +12,8 @@ var Render = require('../Library/Utils/RenderHelper');
  * @param res
  */
 exports.add = function(req,res){
-    var view = {};
     Render.setTitle('ARTICLE');
-    res.render('x/article/add',Render.xParam(view));
+    res.render('x/article/add',Render.setView(null,true));
 }
 
 

@@ -1,48 +1,32 @@
 <!DOCTYPE html>
-<!--Header Layout for Admin-->
-<html>
+<!--[if IE 9]><html class="lt-ie10" lang="zh-cn" > <![endif]-->
+<html class="no-js" lang="zh-cn" >
+
 <head>
-    <title>{{title}}</title>
-    <link href="/public/stylesheets/Boilerplate.css" rel="stylesheet" type="text/css">
-    <link href="/public/stylesheets/font/typicons.min.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation 5</title>
+
+    <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+    <link rel="stylesheet" href="/public/stylesheets/normalize.css">
+    <link rel="stylesheet" href="/public/stylesheets/foundation.min.css">
+
+    <!-- Font CSS -->
+    <link rel="stylesheet" href="/public/stylesheets/font/typicons.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css">
+
+    <!-- If you are using the gem version, you need this only -->
+    <link rel="stylesheet" href="/public/stylesheets/x.css">
     {{{yield-css}}}
+
 </head>
 <body>
-{{> sidebar}}
-<div class="content">
-    <header class="header" style="">
-        <span class="typcn typcn-home"></span>
-        <span class="typcn typcn-chevron-right"></span>
-        ARTICLE
-        <span class="typcn typcn-chevron-right"></span>
-        ADD
 
-        <div class="logout" style="float: right">
-            <span class="typcn typcn-export"></span>
-            登出
-        </div>
-    </header>
-    {{{yield}}}
-</div>
+<!-- body content here -->
+{{{yield}}}
 
 
-<!-- Scripts -->
-<script src="/public/javascripts/components/jquery/jquery.min.js"></script>
-<script>
-    window._skel_config = {
-        prefix: "/public/stylesheets/X",
-        resetCSS: true,
-        normalizeCSS:true,
-        boxModel: "border",
-        grid: { gutters: 30 },
-        breakpoints: {
-            wide: { range: "1200-", containers: 1140, grid: { gutters: 40 } },
-            narrow: { range: "481-1199", containers: 960, grid: { gutters: 20 }},
-            mobile: { range: "-480", containers: "fluid", lockViewport: true, grid: { collapse: true } }
-        }
-    };
-</script>
-<script src="/public/javascripts/common/skel.min.js"></script>
-{{{yield-scripts}}}
+<script data-main="/public/javascripts/main" src="/public/javascripts/components/requirejs/require.js"></script>
+{{{yield-script}}}
 </body>
 </html>

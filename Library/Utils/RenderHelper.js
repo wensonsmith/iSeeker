@@ -6,18 +6,14 @@
 
 var preSet = {};
 
-exports.xParam = function(params){
-    preSet.layout = 'x/partials/header';
-    preSet.partials = {sidebar:'x/partials/sidebar'};
-    if(typeof params == 'undefined')
-        return preSet;
-    else
-        return  extend(preSet,params,true);
-}
-
-exports.iParam = function(params){
-    preSet.layout = 'index/partials/header';
-    preSet.partials = {sidebar:'index/partials/sidebar'} ;
+exports.setView = function(params,isX){
+    if(isX){
+        preSet.layout = 'x/partials/header';
+        preSet.partials = {sidebar:'x/partials/sidebar',navigation:'x/partials/navigation'};
+    }else{
+        preSet.layout = 'index/partials/header';
+        preSet.partials = {sidebar:'index/partials/sidebar'} ;
+    }
 
     if(typeof params == 'undefined')
         return preSet;
