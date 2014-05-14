@@ -68,7 +68,7 @@
     return query;
   }
   var queryDialog =
-    '<i class="typcn typcn-zoom" style="font-size: 2em;float:left;margin-top: 15px"></i> <input type="text" placeholder="Use /re/ syntax for regexp search" style="width:92%;float: right;margin-top: 15px"/>';
+    '<i class="typcn typcn-zoom" style="font-size: 2em;float:left;margin-top: 75px"></i> <input type="text" placeholder="Use /re/ syntax for regexp search" style="width:92%;float: right;margin-top: 80px"/>';
   function doSearch(cm, rev) {
     var state = getSearchState(cm);
     if (state.query) return findNext(cm, rev);

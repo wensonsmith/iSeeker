@@ -34,6 +34,7 @@
     font-size: 1.6em;
     text-align: center;
     line-height: 65px;
+    z-index: 999;
 }
 
 .sidebar .logo{
@@ -59,7 +60,7 @@
 
 .navigation{
     position: fixed;
-    z-index: 999;
+    z-index: 10;
     height: 65px;
     background-color: #1E293C;
     width: 100%;
@@ -83,3 +84,64 @@
 /*********************************************************************************/
 /* 编辑器                                                                           */
 /*********************************************************************************/
+.navigation .metadata{
+    width: 30%;
+    float: left;
+    margin: 15px;
+    color: #f2f2f2;
+}
+.navigation .metadata i{
+    position: absolute;
+    top: 24px;
+    font-size: 1.1rem;
+}
+.navigation .metadata input{
+    font-size: 1.2rem;
+    color: #f2f2f2;
+    background-color: transparent;
+    border: none;
+    outline:none;
+}
+.navigation .metadata input:focus{
+    box-shadow:none;
+}
+.navigation .buttons{
+    position: absolute;
+    right: 100px;
+    top: 15px;
+}
+
+.settings-panel{
+    padding-top: 65px;
+    height: 100%;
+    width: 300px;
+    z-index: 9;
+    position: fixed;
+    left:-300px;
+    box-shadow: 0 2px 30px #333;
+    background-color: #FFFBF0;  /*中国传统色彩：象牙白*/
+    background-image: url('/public/images/overlay.png');
+}
+
+.settings-panel .settings-item{
+    border-bottom: 1px solid #D1D9E0;
+}
+.settings-panel .settings-item .item-label{
+    height: 45px;
+    line-height: 45px;
+    border-right: 1px solid #D1D9E0; /*中国传统色彩：鸭卵青*/
+    text-align: center;
+}
+.settings-panel .settings-item .item-label i{
+    font-size: 1.1rem;
+}
+.settings-panel .settings-item input{
+    height: 45px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+}
+.settings-panel .settings-item input:focus{
+    background-color: rgba(255, 255, 255, 0.4);
+}

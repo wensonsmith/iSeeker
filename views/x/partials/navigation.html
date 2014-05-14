@@ -1,11 +1,14 @@
-<header class="navigation" style="">
-    <span class="typcn typcn-home"></span>
-    <span class="typcn typcn-chevron-right"></span>
-    ARTICLE
-    <span class="typcn typcn-chevron-right"></span>
-    ADD
-    <div class="logout" style="float: right">
-        <span class="typcn typcn-export"></span>
-        登出
+<header class="navigation">
+   <div class="metadata">
+       <a href="javascript:void(0)" id="toggle-settings-panel"><i class="typcn typcn-cog-outline"></i></a>
+       <input type="text" placeholder="文章标题" >
+   </div>
+    <div class="buttons">
+        <a id="publish" href="javascript:void(0)" class="button split radius tiny success">发布文章<span data-options="align:left" data-dropdown="haha"></span></a>
     </div>
 </header>
+<ul id="haha" class="f-dropdown content radius" data-dropdown-content>
+    <li><a href="#"><i class="typcn typcn-plane"></i> 立即发布 </a></li>
+    <li><a href="#"><i class="typcn typcn-tabs-outline"></i> 存为草稿 </a></a></li>
+    <li><a href="#"><i class="typcn typcn-trash"></i> 删除文章 </a></a></li>
+</ul>

@@ -29,4 +29,5 @@ module.exports = function(app){
     app.post('/x/article/update',WatchDog.Bark,Article.update);
 
     app.get('/article/list',Article.list);
+    app.get('/article/:id',Article.article)
 }

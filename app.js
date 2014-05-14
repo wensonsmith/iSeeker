@@ -35,7 +35,7 @@ app.use(express.cookieParser());
 app.use(express.session({
     secret:Settings.cookieSecret,
     store:new MongoStore({
-        db:Settings.db
+        db:Settings.dbName
     })
 }));
 

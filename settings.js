@@ -5,6 +5,6 @@
 
 module.exports = {
     cookieSecret:"IEJXK(#HI",
-    db:'microblog',
-    host:"127.0.0.1"
+    db:'mongodb://127.0.0.1/iSeeker',
+    dbName:'iSeeker'
 }

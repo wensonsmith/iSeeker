@@ -93,7 +93,7 @@ define(['jquery','codemirror','marked','markdown','gfm','addon/search','addon/ac
                 styleActiveLine:  true,
                 matchBrackets:    true,
                 lineWrapping:     true,
-                autofocus:        true,
+                autofocus:        false,
                 showCursorWhenSelecting:  true,
                 highlightSelectionMatches:  true,
                 extraKeys: {
@@ -142,12 +142,13 @@ define(['jquery','codemirror','marked','markdown','gfm','addon/search','addon/ac
 
             editor.on('scroll', function(instance){
                 var scrollInfo = instance.getScrollInfo();
-                var previewHeight = $preview[0].scrollHeight*1.5;
-                $preview.scrollTop( scrollInfo.top / scrollInfo.height * previewHeight);
+                $preview.scrollTop( scrollInfo.top / scrollInfo.height * $preview[0].scrollHeight);
             });
 
             $preview.html(marked(editor.getValue()));
             localStorage.markdown = editor.getValue();
+
+            return editor;
         }
     }
 })
