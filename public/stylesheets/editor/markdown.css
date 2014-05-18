@@ -24,161 +24,91 @@
     box-sizing: border-box;
 }
 
-/* github markdown style */
-input,button,textarea{margin:0;padding:0;font-size:inherit;font-family:inherit}
-button{-moz-box-sizing:content-box;box-sizing:content-box}
-html,body{height:100%;min-width:960px}
-blockquote,q{quotes:none}
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
-table{border-collapse:collapse;border-spacing:0;font-size:100%;font:inherit}
-article,aside,header,footer,nav,section,figure,figcaption,hgroup,progress,canvas{display:block}
-h1,h2,h3,h4,h5,h6{font-weight:bold}
-strong,b{font-weight:bold}
-em,i{font-style:italic}
-p{font-size: 1em}
-:-moz-ui-invalid{box-shadow:none}
+/*Markdown Style*/
+@import url(//fonts.googleapis.com/css?family=PT+Sans);
 
-.markdown{font-size:0.9em;line-height:1.5;overflow:hidden}
-.markdown>*:first-child{margin-top:0 !important}
-.markdown>*:last-child{margin-bottom:0 !important}
-.markdown a.absent{color:#c00}
-.markdown a.anchor{display:block;padding-left:30px;margin-left:-30px;cursor:pointer;position:absolute;top:0;left:0;bottom:0}
-.markdown h1,
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6{margin:20px 0 10px;padding:0;font-weight:bold;-webkit-font-smoothing:antialiased;cursor:text;position:relative}
-
-.markdown h1 .mini-icon-link,
-.markdown h2 .mini-icon-link,
-.markdown h3 .mini-icon-link,
-.markdown h4 .mini-icon-link,
-.markdown h5 .mini-icon-link,
-.markdown h6 .mini-icon-link{display:none;color:#000}
-
-.markdown h1:hover a.anchor,
-.markdown h2:hover a.anchor,
-.markdown h3:hover a.anchor,
-.markdown h4:hover a.anchor,
-.markdown h5:hover a.anchor,
-.markdown h6:hover a.anchor{text-decoration:none;line-height:1;padding-left:0;margin-left:-22px;top:15%}
-
-.markdown h1:hover a.anchor .mini-icon-link,
-.markdown h2:hover a.anchor .mini-icon-link,
-.markdown h3:hover a.anchor .mini-icon-link,
-.markdown h4:hover a.anchor .mini-icon-link,
-.markdown h5:hover a.anchor .mini-icon-link,
-.markdown h6:hover a.anchor .mini-icon-link{display:inline-block}
-
-.markdown h1 tt,
-.markdown h1 code,
-.markdown h2 tt,
-.markdown h2 code,
-.markdown h3 tt,
-.markdown h3 code,
-.markdown h4 tt,
-.markdown h4 code,
-.markdown h5 tt,
-.markdown h5 code,
-.markdown h6 tt,
-.markdown h6 code{font-size:inherit}
-
-.markdown h1{font-size:28px;color:#000}
-.markdown h2{font-size:24px;border-bottom:1px solid #ccc;color:#000}
-.markdown h3{font-size:18px}
-.markdown h4{font-size:16px}
-.markdown h5{font-size:14px}
-.markdown h6{color:#777;font-size:14px}
-.markdown p,
-.markdown blockquote,
-.markdown ul,
-.markdown ol,
-.markdown dl,
-.markdown table,
-.markdown pre{margin:15px 0}
-.markdown hr{
-    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
-    border:0 none;
-    color:#ccc;
-    height:4px;
-    padding:0
+.markdown{
+    font-family: 'PT Sans', Helvetica, 'Helvetica Neuve', Arial, Tahoma, sans-serif;
+}
+.markdown h1, h2, h3, h4, h5, h6 {
+    color:#222;
+    margin:0 0 20px;
 }
 
-.markdown>h2:first-child,
-.markdown>h1:first-child,
-.markdown>h1:first-child+h2,
-.markdown>h3:first-child,
-.markdown>h4:first-child,
-.markdown>h5:first-child,
-.markdown>h6:first-child{margin-top:0;padding-top:0}
-.markdown a:first-child h1,
-.markdown a:first-child h2,
-.markdown a:first-child h3,
-.markdown a:first-child h4,
-.markdown a:first-child h5,
-.markdown a:first-child h6{margin-top:0;padding-top:0}
-.markdown h1+p,
-.markdown h2+p,
-.markdown h3+p,
-.markdown h4+p,
-.markdown h5+p,
-.markdown h6+p{margin-top:0}
-.markdown li p.first{display:inline-block}
-.markdown ul,
-.markdown ol{padding-left:30px}
-.markdown ul.no-list,
-.markdown ol.no-list{list-style-type:none;padding:0}
-.markdown ul li>:first-child,
-.markdown ul li ul:first-of-type,
-.markdown ol li>:first-child,
-.markdown ol li ul:first-of-type{margin-top:0px}
-.markdown ul ul,
-.markdown ul ol,
-.markdown ol ol,
-.markdown ol ul{margin-bottom:0}
-.markdown dl{padding:0}
-.markdown dl dt{font-size:14px;font-weight:bold;font-style:italic;padding:0;margin:15px 0 5px}
-.markdown dl dt:first-child{padding:0}
-.markdown dl dt>:first-child{margin-top:0px}
-.markdown dl dt>:last-child{margin-bottom:0px}
-.markdown dl dd{margin:0 0 15px;padding:0 15px}
-.markdown dl dd>:first-child{margin-top:0px}
-.markdown dl dd>:last-child{margin-bottom:0px}
-.markdown blockquote{border-left:4px solid #DDD;padding:0 15px;color:#777}
-.markdown blockquote>:first-child{margin-top:0px}
-.markdown blockquote>:last-child{margin-bottom:0px}
-.markdown table th{font-weight:bold}
-.markdown table th,
-.markdown table td{border:1px solid #ccc;padding:6px 13px}
-.markdown table tr{border-top:1px solid #ccc;background-color:#fff}
-.markdown table tr:nth-child(2n){background-color:#f8f8f8}
-.markdown img{max-width:100%;-moz-box-sizing:border-box;box-sizing:border-box}
-.markdown span.frame{display:block;overflow:hidden}
-.markdown span.frame>span{border:1px solid #ddd;display:block;float:left;overflow:hidden;margin:13px 0 0;padding:7px;width:auto}
-.markdown span.frame span img{display:block;float:left}
-.markdown span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}
-.markdown span.align-center{display:block;overflow:hidden;clear:both}
-.markdown span.align-center>span{display:block;overflow:hidden;margin:13px auto 0;text-align:center}
-.markdown span.align-center span img{margin:0 auto;text-align:center}
-.markdown span.align-right{display:block;overflow:hidden;clear:both}
-.markdown span.align-right>span{display:block;overflow:hidden;margin:13px 0 0;text-align:right}
-.markdown span.align-right span img{margin:0;text-align:right}
-.markdown span.float-left{display:block;margin-right:13px;overflow:hidden;float:left}
-.markdown span.float-left span{margin:13px 0 0}
-.markdown span.float-right{display:block;margin-left:13px;overflow:hidden;float:right}
-.markdown span.float-right>span{display:block;overflow:hidden;margin:13px auto 0;text-align:right}
-.markdown code,
-.markdown tt{margin:0 2px;padding:0px 5px;border:1px solid #eaeaea;background-color:#f8f8f8;border-radius:3px}
-.markdown code{white-space:nowrap}
-.markdown pre>code{margin:0;padding:0;white-space:pre;border:none;background:transparent}
-.markdown .highlight pre,
-.markdown pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}
-.markdown pre code,
-.markdown pre tt{margin:0;padding:0;background-color:transparent;border:none}
+.markdown h1 { font-size: 2em; line-height: 1; }
+.markdown h2 { font-size: 1.6em; line-height: 1.25; border-bottom: 1px solid #c0c0c0}
+.markdown h3 { font-size: 1.4em; line-height: 1.25; border-left: 3px solid darkseagreen;padding-left: 10px}
+.markdown h4 { font-size: 1.2em; line-height: 1.25; }
+.markdown h5 { font-size: 1em;   line-height: 1; }
+.markdown h6 { font-size: 1em;   line-height: 1; color: #999999}
 
-#download-box {position:Fixed; top: 40%; right: 20px; }
-#download-box img {width: 24px; height: 24px;cursor: pointer;}
+.markdown p, ul, ol, table, pre, dl {
+    margin:0 0 20px;
+}
 
-#fork-me-on-github img{position: absolute; top: 0; right: 0; z-index: 999; border: 0;}
+.markdown ul, ol{
+    padding-left: 3.333em;
+}
+.markdown ul{
+    list-style: circle;
+}
+
+.markdown blockquote {
+    border-left:2px solid #e5e5e5;
+    margin:0;
+    padding:0 0 0 20px;
+    font-style:italic;
+    background-color: #fafafa;
+}
+
+.markdown code, pre {
+    color:#333;
+    font-size:0.85rem;
+    line-height: 1.25;
+    font-weight: normal;
+}
+
+.markdown pre {
+    padding:8px 15px;
+    background: #f8f8f8;
+    border:1px solid #e5e5e5;
+    overflow-x: auto;
+}
+
+.markdown table {
+    width:100%;
+    border-collapse:collapse;
+}
+
+.markdown th, td {
+    text-align:left;
+    padding:5px 10px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.markdown dt {
+    color:#444;
+    font-weight:700;
+}
+
+.markdown th {
+    color:#444;
+}
+
+.markdown img {
+    max-width:100%;
+}
+
+.markdown strong {
+    color:#222;
+    font-weight:700;
+}
+
+.markdown hr {
+    border:0;
+    background:#e5e5e5;
+    height:1px;
+    margin:0 0 20px;
+}
+
 

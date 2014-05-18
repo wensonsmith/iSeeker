@@ -16,7 +16,8 @@ requirejs.config({
         markdown:   'components/codemirror/mode/markdown/markdown',
         gfm:        'components/codemirror/mode/gfm/gfm',
         modernizr:  'components/modernizr/modernizr',
-        foundation: 'components/foundation/foundation.min'
+        foundation: 'components/foundation/foundation.min',
+        highlight:  'components/highlight/highlight.pack'
     },
     map:{
       '*':{

@@ -2,18 +2,13 @@
 {{> sidebar}}
 
 <div class="main">
-    <div class="row">
-        <section class="column">
-            <header style="text-align: center">
-                <div>
-                    <img class="seeker-logo" src='/public/images/logo.png' alt="SeekBetter.Me">
-                </div>
-                <div>
-                    <div class="seeker-title">Seek Better . Me</div>
-                    <div class="seeker-subtitle"> You have got to find what you love</div>
-                </div>
-            </header>
-        </section>
+    <div class="row collapse">
+        <div class="columns large-1" style="text-align: center;">
+           <a href="/"><img class="seeker-logo" src='/public/images/logo.png' alt="SeekBetter.Me" style="width: 50px;margin-bottom: 2px"></a>
+        </div>
+        <div class="columns large-11">
+            <div style="color: #aeaeae;font-size: 0.8rem;line-height: 60px"> |&nbsp;&nbsp; 文章详情</div>
+        </div>
     </div>
 
     <!-- Articles -->
@@ -21,20 +16,29 @@
     <div class="article {{class}}">
         <div  class="row">
             <article class="column">
-                <header>
-                    <div class="title"><a href="article/{{_id}}" title="{{title}}">{{title}}</a></div>
+                <header style="text-align: center">
+                    <div class="title">{{title}}</div>
                     <div class="metadata">
-                        <i class="typcn typcn-calender"><span>{{create_at}}</span></i>
+                        <i class="typcn typcn-calender"><span>{{friendlyDate}}</span></i>
                         <!--<i class="typcn typcn-message"><span>80</span></i>-->
                         <i class="typcn typcn-tag"><span>{{tags}}</span></i>
                     </div>
                 </header>
-                <section class="section">
+                <section class="section markdown">
                     {{{content}}}
                 </section>
             </article>
         </div>
     </div>
     {{/article}}
+
+    <footer class="footer">
+        <div class="row">
+            <div class="column">
+                <p>SeekBetter.Me&nbsp;&nbsp;&nbsp;&nbsp;Copyright©2014<br><b>iSeeker ®</b>  |  强力驱动</p>
+                <img src="/public/images/footerlogo.png"/>
+            </div>
+        </div>
+    </footer>
 
 </div>

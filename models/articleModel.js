@@ -24,7 +24,7 @@ exports.add = function(title,content,url,time,callback){
     if(time.length === 0){
         article.create_at = Date.now();
     }else{
-        article.create_at = time;
+        article.create_at = new Date(time);
     }
     article.save(callback);
 }
@@ -39,8 +39,14 @@ exports.getArticleById = function(id,callback){
 }
 
 
+/**
+ * 根据查询条件获得文章
+ * @param query
+ * @param options
+ * @param callback
+ */
 exports.getArticlesByQuery = function(query,options,callback){
-    var fields = ['_id','title','content','tags','create_at'];
+    var fields = ['_id','title','content','url','create_at'];
     ArticleModel.find(query,fields,options,function(err,doc){
         if(err){
             return callback(err);
@@ -51,4 +57,14 @@ exports.getArticlesByQuery = function(query,options,callback){
         return callback(null,doc);
 
     });
+}
+
+
+/**
+ * 根据查询条件获得文章数量
+ * @param query
+ * @param callback
+ */
+exports.getCountByQuery = function(query,callback){
+    ArticleModel.count(query, callback);
 }

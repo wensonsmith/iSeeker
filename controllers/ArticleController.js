@@ -5,6 +5,13 @@
  */
 
 var MarkDown = require('marked');
+var highlight = require('highlight.js');
+MarkDown.setOptions({
+    breaks:true,
+    highlight: function (code) {
+        return highlight.highlightAuto(code).value;
+    }
+});
 var Render = require('../Library/Utils/RenderHelper');
 var Article = require('../models/articleModel');
 var Tag = require('../models/tagModel');
@@ -26,6 +33,7 @@ exports.add = function(req,res){
  * 保存新文章
  * @param req
  * @param res
+ * @param next
  */
 exports.save = function(req,res,next){
 
@@ -79,11 +87,7 @@ exports.save = function(req,res,next){
             })
         }//___________标签处理结束
     });
-
-
-
-
-}
+};
 
 
 /**
@@ -110,18 +114,23 @@ exports.update = function(req,res){
  * @param res
  */
 exports.list = function(req,res){
-
+    Article.getArticlesByQuery();
 }
 
 
 exports.article = function(req,res){
-    Article.getArticleById(req.params.id,function(err,article){
-        if(err){
-            return err;
-        }
-        var date = new Date(article.create_at);
-        article.create_at = date.toLocaleDateString();
-        article.content = MarkDown(article.content);
+
+    var render = function(article){
         res.render('index/article',Render.setView({article:article}));
-    })
+    };
+
+    var proxy = new EventProxy();
+    var events = ['article'];
+    proxy.all(events,render);
+
+    Article.getArticleById(req.params.id,proxy.done(function(article){
+        article.friendlyDate = Render.formatDate(article.create_at,true);
+        article.content = MarkDown(article.content);
+        proxy.emit('article', article);
+    }));
 }

@@ -5,7 +5,7 @@
  * @date 14-3-27 - 下午11:46
  */
 
-define(['jquery','codemirror','marked','markdown','gfm','addon/search','addon/active-line','addon/match-highlight'],function($,CodeMirror,marked){
+define(['jquery','codemirror','marked','highlight','markdown','gfm','addon/search','addon/active-line','addon/match-highlight'],function($,CodeMirror,marked,highlight){
 
     /**
      * insert '## text'
@@ -83,7 +83,10 @@ define(['jquery','codemirror','marked','markdown','gfm','addon/search','addon/ac
             }
             //init marked options
             marked.setOptions({
-                breaks:true
+                breaks:true,
+                highlight: function (code) {
+                    return highlight.highlightAuto(code).value;
+                }
             });
 
             var editor = CodeMirror.fromTextArea($this, {
@@ -135,9 +138,8 @@ define(['jquery','codemirror','marked','markdown','gfm','addon/search','addon/ac
             });
 
             editor.on("change", function(doc, changeObj) {
-                $preview.html(marked(doc.getValue()));
-                $textarea.val(doc.getValue());
-                localStorage.markdown = doc.getValue();
+                $preview.html(marked(editor.getValue()));
+                localStorage.markdown = editor.getValue();
             });
 
             editor.on('scroll', function(instance){

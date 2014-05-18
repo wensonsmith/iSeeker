@@ -5,39 +5,59 @@
  */
 
 var MarkDown = require('marked');
+var highlight = require('highlight.js');
+MarkDown.setOptions({
+    breaks:true,
+    highlight: function (code) {
+        return highlight.highlightAuto(code).value;
+    }
+});
 var Render = require('../Library/Utils/RenderHelper');
-
 var ArticleModel = require('../models/articleModel');
-//var fs = require('fs');
+var EventProxy = require('eventproxy');
 
 exports.index = function(req,res){
-    var params = {articles:null};
-    var query = {};
-    var options = {limit: 100};
+    var page = parseInt(req.params.page, 10) || 1;
+    //每页11篇文章
+    var limit  = 11;
+    var skip   = (page-1)*limit;
+    var params = {};
+    var query  = {};
+    var options = {skip: skip, limit: limit, sort: [ [ 'create_at', 'desc' ] ]};
+
+    //开始渲染页面
+    var render = function(articles,pages){
+        params.articles = articles;
+        params.pages = pages;
+        res.render('index/index',Render.setView(params));
+    };
+
+    var events = ['articles','pages'];
+    var proxy = new EventProxy();
+    proxy.all(events,render);
+
     ArticleModel.getArticlesByQuery(query,options,function(err,doc){
         if(err){
             console.log(err);
         }
         doc.forEach(function(value,index){
             doc[index].friendlyDate = Render.formatDate(value.create_at,true);
-            doc[index].content = MarkDown(value.content);
-            doc[index]['class'] = getArticleClass(index);
+            doc[index].content = MarkDown(value.content.split('<!--more-->')[0]);
         });
-        params.articles = doc;
-        res.render('index/index',Render.setView(params));
+        proxy.emit('articles',doc);
     });
 
-}
-
-var getArticleClass = function(index){
-    if(index == 0)
-    {
-        return 'first';
-    }else{
-        if(index % 2 == 1){
-            return 'second';
-        }else{
-            return 'third';
+    ArticleModel.getCountByQuery(query,proxy.done(function(count){
+        var pagesCount = Math.ceil(count/limit);
+        var pages = [];
+        for(i=1;i<=pagesCount;i++){
+            var pageItem = {page:null,active:false};
+            pageItem.page = i;
+            if(page === i){
+                pageItem.active = true;
+            }
+            pages.push(pageItem);
         }
-    }
-}
+        proxy.emit('pages',pages);
+    }))
+};

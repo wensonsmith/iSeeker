@@ -2,7 +2,7 @@
 {{> sidebar}}
 
 <div class="main">
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px">
         <section class="column">
             <header style="text-align: center">
                 <div>
@@ -18,18 +18,18 @@
 
     <!-- Articles -->
     {{#articles}}
-    <div class="article {{class}}">
+    <div class="article">
         <div  class="row">
             <article class="column">
                 <header>
-                    <div class="title"><a href="article/{{_id}}" title="{{title}}">{{title}}</a></div>
+                    <div class="title"><a href="/article/{{_id}}" title="{{title}}">{{title}}</a></div>
                     <div class="metadata">
                         <i class="typcn typcn-calender"><span>{{friendlyDate}}</span></i>
                         <!--<i class="typcn typcn-message"><span>80</span></i>-->
                         <i class="typcn typcn-tag"><span>{{tags}}</span></i>
                     </div>
                 </header>
-                <section class="section">
+                <section class="section markdown">
                     {{{content}}}
                 </section>
             </article>
@@ -37,4 +37,38 @@
     </div>
     {{/articles}}
 
+    <div class="row" style="margin-top: 30px">
+        <div class="pagination-centered">
+            <ul class="pagination">
+                {{#pages}}
+                <li {{#active}}class="current"{{/active}}><a href="/articles/page/{{page}}">{{page}}</a></li>
+                {{/pages}}
+            </ul>
+        </div>
+    </div>
+
+    <!--<div class="row" style="margin-top: 30px">-->
+        <!--<div class="pagination-centered">-->
+            <!--<ul class="pagination">-->
+                <!--<li class="arrow unavailable"><a href="">&laquo;</a></li>-->
+                <!--<li class="current"><a href="">1</a></li>-->
+                <!--<li><a href="">2</a></li>-->
+                <!--<li><a href="">3</a></li>-->
+                <!--<li><a href="">4</a></li>-->
+                <!--<li class="unavailable"><a href="">&hellip;</a></li>-->
+                <!--<li><a href="">12</a></li>-->
+                <!--<li><a href="">13</a></li>-->
+                <!--<li class="arrow"><a href="">&raquo;</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <footer class="footer">
+        <div class="row">
+            <div class="column">
+                <p>SeekBetter.Me&nbsp;&nbsp;&nbsp;&nbsp;Copyright©2014<br><b>iSeeker ®</b>  |  强力驱动</p>
+                <img src="/public/images/footerlogo.png"/>
+            </div>
+        </div>
+    </footer>
 </div>
