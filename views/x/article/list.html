@@ -1,9 +1,98 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{{#yield-css}}
+<link href="/public/stylesheets/editor/markdown.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/public/stylesheets/editor/rainbow.css" rel="stylesheet" type="text/css">
+{{/yield-css}}
 
-</body>
-</html>
+{{> sidebar}}
+<div class="container">
+    <header class="navigation list-navigation">
+        <div class="list-filter">
+            <div class="row collapse">
+                <div class="columns large-4">
+                    <a href="javascript:void(0)" data-dropdown="list-data"> Articles <i class="typcn typcn-arrow-sorted-down"></i></a>
+                </div>
+            </div>
+        </div>
+        <ul id="list-data" class="f-dropdown content radius" data-dropdown-content>
+            <li><a href="#"><i class="typcn typcn-message"></i> Sentences </a></li>
+            <li><a href="#"><i class="typcn typcn-image"></i> Pictures </a></li>
+        </ul>
+        <div class="list-action" style="text-align: right">
+                <a href="javascript:void(0)" style="margin-right: 30px"> <i class="typcn typcn-edit"></i> Edit </a>
+                <a id="list-delete" href="javascript:void(0)" data-id=""> <i class="typcn typcn-trash"></i> Delete </a>
+        </div>
+    </header>
+
+    <div class="list-body">
+        <div id="list-bar" class="list-bar">
+            <div class="list-item" style="padding: 12px 25px">
+                <div class="row collapse">
+                    <div class="small-9 columns">
+                        <input type="text" placeholder="" />
+                    </div>
+                    <div class="small-3 columns">
+                        <span class="postfix"><i class="typcn typcn-zoom"></i>搜索 </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="list-content" class="list-content markdown"></div>
+    </div>
+</div>
+
+{{#yield-script}}
+<script>
+    require(['main'],function(){
+        require(['jquery'],function($){
+            var contents = {};
+            $.get('/x/api/article/list',function(data){
+                contents = data.contents;
+                render_titles(data.titles);
+            });
+
+            var render_titles = function(titles){
+                var HTML = '';
+                $.each(titles,function(idx,val){
+                    if(idx === 0){
+                        HTML += '<a class="list-item active" data-idx="'+idx+'">';
+                        render_contents(idx);
+                    }else{
+                        HTML += '<a class="list-item" data-idx="'+idx+'">';
+                    }
+
+                    HTML += '    <p class="item-title">'+val.title+'</p>';
+                    HTML += '    <p class="item-time"><span>'+val.time+'</span></p>';
+                    HTML += '</a>';
+                });
+
+                $("#list-bar").append(HTML);
+            };
+
+            var render_contents = function(idx){
+                var content = contents[idx];
+                $("#list-delete").attr('data-id',content.id);
+                $("#list-content").html(content.content);
+            };
+
+            $(".list-bar").on('click','.list-item',function(){
+                var index = $(this).data('idx');
+                render_contents(index);
+                $('.list-item.active').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            $("#list-delete").click(function(){
+               var id = $(this).attr('data-id');
+                $.get('/x/api/article/delete?id='+id,function(data){
+                    if(data.status === 1){
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+{{/yield-script}}
+

@@ -41,8 +41,8 @@ exports.index = function(req,res){
             console.log(err);
         }
         doc.forEach(function(value,index){
-            doc[index].friendlyDate = Render.formatDate(value.create_at,true);
-            doc[index].content = MarkDown(value.content.split('<!--more-->')[0]);
+            doc[index].set('friendlyDate', Render.formatDate(value.create_at,true));
+            doc[index].set('content',MarkDown(value.content.split('<!--more-->')[0]));
         });
         proxy.emit('articles',doc);
     });

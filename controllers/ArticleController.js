@@ -108,14 +108,82 @@ exports.update = function(req,res){
 
 }
 
+exports.api_list = function(req,res){
+    var page = parseInt(req.query.page) || 1;
+    //每页11篇文章
+    var limit  = 11;
+    var skip   = (page-1)*limit;
+    var query  = {title: { $ne : '' }};
+    var options = {skip: skip, limit: limit, sort: [ [ 'create_at', 'desc' ] ]};
+
+    //开始渲染页面
+    var render = function(articles,pages){
+        articles.pages = pages;
+        res.json(articles);
+    };
+
+    var events = ['articles','pages'];
+    var proxy = new EventProxy();
+    proxy.all(events,render);
+
+    Article.getArticlesByQuery(query,options,function(err,doc){
+        if(err){
+            console.log(err);
+        }
+        var titles = [];
+        var contents = [];
+        var result = {};
+        doc.forEach(function(value,index){
+            var title_item = {};
+            title_item.title = value.title;
+            title_item.time  = Render.formatDate(value.create_at,true);
+            titles.push(title_item);
+
+            var content_item = {};
+            content_item.id = value._id;
+            content_item.content = MarkDown(value.content);
+            contents.push(content_item);
+        });
+        result.titles = titles;
+        result.contents = contents;
+        proxy.emit('articles',result);
+    });
+
+    Article.getCountByQuery(query,proxy.done(function(count){
+        var all_pages = Math.ceil(count/limit);
+        var pages = {};
+        pages.all_pages = all_pages;
+        pages.current_page = page;
+//        var pages = [];
+//        for(i=1;i<=pagesCount;i++){
+//            var pageItem = {page:null,active:false};
+//            pageItem.page = i;
+//            if(page === i){
+//                pageItem.active = true;
+//            }
+//            pages.push(pageItem);
+//        }
+        proxy.emit('pages',pages);
+    }))
+};
+
+exports.api_delete = function(req,res){
+    var id = req.query.id
+    options = {};
+    var query = {_id:id};
+    Article.deleteArticleById(id);
+    res.json({"status":1});
+};
+
 /**
  * 文章列表
  * @param req
  * @param res
  */
 exports.list = function(req,res){
-    Article.getArticlesByQuery();
-}
+    var params = {};
+    res.render('x/article/list',Render.setView(params,true));
+};
 
 
 exports.article = function(req,res){
