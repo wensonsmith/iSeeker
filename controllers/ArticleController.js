@@ -95,16 +95,27 @@ exports.save = function(req,res,next){
  * @param req
  * @param res
  */
-exports.edit = function(req,res){
+exports.update = function(req,res){
+    var render = function(article){
+        console.log(article);
+        res.render('x/article/update',Render.setView({article:article},true));
+    };
 
-}
+    var proxy = new EventProxy();
+    var events = ['article'];
+    proxy.all(events,render);
+
+    Article.getArticleById(req.params.id,proxy.done(function(article){
+        proxy.emit('article', article);
+    }));
+};
 
 /**
  * 更新文章
  * @param req
  * @param res
  */
-exports.update = function(req,res){
+exports.api_update = function(req,res){
 
 }
 

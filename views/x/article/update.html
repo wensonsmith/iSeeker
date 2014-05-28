@@ -1,0 +1,101 @@
+{{#yield-css}}
+<link href="/public/stylesheets/editor/codemirror.css" rel="stylesheet" type="text/css">
+<link href="/public/stylesheets/editor/markdown.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/public/javascripts/components/codemirror/addon/dialog/dialog.css" rel="stylesheet" type="text/css">
+<link href="/public/stylesheets/editor/rainbow.css" rel="stylesheet" type="text/css">
+{{/yield-css}}
+
+{{> sidebar}}
+
+<div class="container">
+
+    <header class="navigation">
+        <div class="metadata">
+            <input type="text" id="article-title" placeholder="请填写标题" value="{{article.title}}">
+        </div>
+        <div class="buttons">
+            <a id="publish" href="javascript:void(0)" class="button split radius tiny success">更新文章<span data-options="align:left" data-dropdown="actions"></span></a>
+        </div>
+    </header>
+    <ul id="actions" class="f-dropdown content radius" data-dropdown-content>
+        <li><a href="#"><i class="typcn typcn-plane"></i> 更新文章 </a></li>
+        <li><a href="#"><i class="typcn typcn-tabs-outline"></i> 存为草稿 </a></a></li>
+        <li><a href="#"><i class="typcn typcn-trash"></i> 删除文章 </a></a></li>
+    </ul>
+
+    <div class="wrapper">
+        <div id="settings-panel" class="settings-panel">
+            <div class="row collapse settings-item">
+                <div class="large-3 small-3 columns">
+                    <label class="item-label" for="article-tags">
+                        <i class="typcn typcn-tags"></i> 标签</label>
+                </div>
+                <div class="large-9 small-9 columns">
+                    <input type="text" id="article-tags" placeholder="">
+                </div>
+            </div>
+            <div class="row collapse settings-item">
+                <div class="large-3 small-3 columns">
+                    <label class="item-label" for="article-url">
+                        <i class="typcn typcn-link"></i> 链接</label>
+                </div>
+                <div class="large-9 small-9 columns">
+                    <input type="text" id="article-url" placeholder="" value="{{article.url}}">
+                </div>
+            </div>
+            <div class="row collapse settings-item">
+                <div class="large-3 small-3 columns">
+                    <label class="item-label" for="article-time">
+                        <i class="typcn typcn-time"></i> 时间</label>
+                </div>
+                <div class="large-9 small-9 columns">
+                    <input type="text" id="article-time" placeholder="" value="{{article.create_at}}">
+                </div>
+            </div>
+
+        </div>
+        <div id="md-input">
+            <textarea id="editor" data-preview="#md-preview" style="display: none">{{article.content}}</textarea>
+
+        </div>
+        <div id="md-preview" class="markdown"></div>
+    </div>
+
+    {{#yield-script}}
+    <script>
+        require(['main'],function(){
+            require(['jquery','modules/editor/MEditor'],function($,MEditor){
+                var editor = MEditor.init($("#editor"));
+
+                var toggle = true;
+                $("#article-title").click(function(){
+                    $("#settings-panel").animate({left:"80px"});
+                });
+
+                $("#article-title,#article-tags,#article-url,#article-time")
+                        .focus(function(){
+                            toggle = false;
+                        })
+                        .blur(function(){
+                            setTimeout(function(){
+                                if(toggle){
+                                    $("#settings-panel").animate({left:"-300px"});
+                                }
+                            },0)
+                            toggle = true;
+                        })
+
+                $("#publish").click(function(){
+                    var article = {};
+                    article.title = $("#article-title").val();
+                    article.content = editor.getValue();
+                    article.tags  = $("#article-tags").val();
+                    article.time  = $("#article-time").val();
+                    article.url   = $("#article-url").val();
+                    console.log(article);
+                    $.post('/x/article/save',article);
+                })
+            })
+        })
+    </script>
+    {{/yield-script}}

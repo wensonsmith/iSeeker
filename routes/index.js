@@ -22,7 +22,7 @@ module.exports = function(app){
 
     //Article
     app.get('/x/article/add',WatchDog.Bark,Article.add);
-    app.get('/x/article/edit',WatchDog.Bark,Article.edit);
+    app.get('/x/article/update/:id',WatchDog.Bark,Article.update);
     app.get('/x/article/list',WatchDog.Bark,Article.list);
 
     app.post('/x/article/save',WatchDog.Bark,Article.save);

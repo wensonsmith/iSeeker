@@ -18,7 +18,7 @@
             <li><a href="#"><i class="typcn typcn-image"></i> Pictures </a></li>
         </ul>
         <div class="list-action" style="text-align: right">
-                <a href="javascript:void(0)" style="margin-right: 30px"> <i class="typcn typcn-edit"></i> Edit </a>
+                <a id="list-update" href="#" style="margin-right: 30px"> <i class="typcn typcn-edit"></i> Edit </a>
                 <a id="list-delete" href="javascript:void(0)" data-id=""> <i class="typcn typcn-trash"></i> Delete </a>
         </div>
     </header>
@@ -71,6 +71,7 @@
             var render_contents = function(idx){
                 var content = contents[idx];
                 $("#list-delete").attr('data-id',content.id);
+                $("#list-update").attr('href','/x/article/update/'+content.id);
                 $("#list-content").html(content.content);
             };
 
@@ -85,7 +86,11 @@
                var id = $(this).attr('data-id');
                 $.get('/x/api/article/delete?id='+id,function(data){
                     if(data.status === 1){
-                        window.location.reload();
+                        var current_item = $(".list-item.active");
+                        var nextItem = current_item.next();
+                        var nextIdx  = nextItem.data('idx');
+                        render_contents(nextIdx);
+                        $.when(current_item.fadeOut().remove()).then(nextItem.addClass('active'));
                     }
                 });
             });

@@ -78,7 +78,7 @@ define(['jquery','codemirror','marked','highlight','markdown','gfm','addon/searc
             var $textarea = element;
             var $preview  = $(element.data('preview'));
 
-            if(localStorage.markdown != undefined){
+            if(localStorage.markdown != undefined && $textarea.val().length === 0){
                 $textarea.val(localStorage.markdown);
             }
             //init marked options
