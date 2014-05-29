@@ -59,8 +59,8 @@ exports.getArticlesByQuery = function(query,options,callback){
     });
 };
 
-exports.deleteArticleById = function(id){
-    ArticleModel.findOne({'_id':id}).remove().exec();
+exports.deleteArticleByQuery = function(query,callback){
+    ArticleModel.find(query).remove(callback);
 };
 
 

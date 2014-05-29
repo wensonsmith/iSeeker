@@ -36,4 +36,5 @@ module.exports = function(app){
     //API
     app.get('/x/api/article/list',Article.api_list);
     app.get('/x/api/article/delete',Article.api_delete);
+    app.post('/x/api/article/update',Article.api_update);
 }

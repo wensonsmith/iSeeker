@@ -37,9 +37,9 @@ exports.formatDate = function (date,friendly){
     minute = ((minute < 10) ? '0' : '') + minute;
     second = ((second < 10) ? '0': '') + second;
 
-    var thisYear = new Date().getFullYear();
-    year = (thisYear === year) ? '' : (year + '-');
-    return year + month + '-' + day + ' ' + hour + ':' + minute;
+//    var thisYear = new Date().getFullYear();
+//    year = (thisYear === year) ? '' : (year + '-');
+    return year+ '-' + month + '-' + day + ' ' + hour + ':' + minute;
 };
 
 exports.setView = function(params,isX){

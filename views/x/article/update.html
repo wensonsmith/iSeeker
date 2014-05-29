@@ -14,7 +14,7 @@
             <input type="text" id="article-title" placeholder="请填写标题" value="{{article.title}}">
         </div>
         <div class="buttons">
-            <a id="publish" href="javascript:void(0)" class="button split radius tiny success">更新文章<span data-options="align:left" data-dropdown="actions"></span></a>
+            <a id="update" href="javascript:void(0)" class="button split radius tiny success">更新文章<span data-options="align:left" data-dropdown="actions"></span></a>
         </div>
     </header>
     <ul id="actions" class="f-dropdown content radius" data-dropdown-content>
@@ -49,7 +49,7 @@
                         <i class="typcn typcn-time"></i> 时间</label>
                 </div>
                 <div class="large-9 small-9 columns">
-                    <input type="text" id="article-time" placeholder="" value="{{article.create_at}}">
+                    <input type="text" id="article-time" placeholder="" value="{{article.time}}">
                 </div>
             </div>
 
@@ -85,15 +85,14 @@
                             toggle = true;
                         })
 
-                $("#publish").click(function(){
+                $("#update").click(function(){
                     var article = {};
                     article.title = $("#article-title").val();
                     article.content = editor.getValue();
                     article.tags  = $("#article-tags").val();
                     article.time  = $("#article-time").val();
                     article.url   = $("#article-url").val();
-                    console.log(article);
-                    $.post('/x/article/save',article);
+                    $.post('/x/api/article/update?id={{article._id}}',article);
                 })
             })
         })

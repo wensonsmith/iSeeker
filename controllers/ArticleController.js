@@ -97,7 +97,6 @@ exports.save = function(req,res,next){
  */
 exports.update = function(req,res){
     var render = function(article){
-        console.log(article);
         res.render('x/article/update',Render.setView({article:article},true));
     };
 
@@ -106,6 +105,7 @@ exports.update = function(req,res){
     proxy.all(events,render);
 
     Article.getArticleById(req.params.id,proxy.done(function(article){
+        article.time = Render.formatDate(article.create_at,false);
         proxy.emit('article', article);
     }));
 };
@@ -116,7 +116,20 @@ exports.update = function(req,res){
  * @param res
  */
 exports.api_update = function(req,res){
-
+    var post = req.body;
+    Article.getArticleById(req.query.id,function(err,article){
+        article.title = post.title;
+        article.content = post.content;
+        article.url = post.url;
+        if(post.time.length === 0){
+            article.create_at = Date.now();
+        }else{
+            article.create_at = new Date(post.time);
+        }
+        article.save(function(){
+            res.json({"status":1});
+        });
+    });
 }
 
 exports.api_list = function(req,res){
@@ -179,11 +192,11 @@ exports.api_list = function(req,res){
 };
 
 exports.api_delete = function(req,res){
-    var id = req.query.id
-    options = {};
-    var query = {_id:id};
-    Article.deleteArticleById(id);
-    res.json({"status":1});
+    var query = {_id:req.query.id};
+    Article.deleteArticleByQuery(query,function(err,num){
+        res.json({"status":1,"msg":num});
+    });
+
 };
 
 /**
@@ -200,6 +213,7 @@ exports.list = function(req,res){
 exports.article = function(req,res){
 
     var render = function(article){
+        Render.setTitle(article.title);
         res.render('index/article',Render.setView({article:article}));
     };
 

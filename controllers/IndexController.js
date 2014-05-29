@@ -29,6 +29,7 @@ exports.index = function(req,res){
     var render = function(articles,pages){
         params.articles = articles;
         params.pages = pages;
+        Render.setTitle("Wenson Smith")
         res.render('index/index',Render.setView(params));
     };
 
