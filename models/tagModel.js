@@ -28,3 +28,15 @@ exports.getTagByName = function(name,callback){
 exports.getAllTags = function(callback){
     Tag.find({}, [], {sort: [['order', 'asc']]}, callback);
 };
+
+
+exports.deleteTagById = function(id,callback){
+    Tag.findOne({'_id':id},function(err,tag){
+        if(tag.article_count === 1){
+            tag.remove(callback);
+        }else{
+            tag.article_count = tag.article_count-1;
+            tag.save( callback(err) );
+        }
+    })
+};

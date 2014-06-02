@@ -15,7 +15,9 @@ var ArticleSchema = new Schema({
     url:{type:String},
     reply_count:{type:Number,default:0},
     visit_count:{type:Number,default:0},
-    create_at:{type:Date,default:Date.now}
+    create_at:{type:Date,default:Date.now},
+    static_html:{type:Boolean,default:false},
+    status:{type:Number,default:1}
 });
 
 mongoose.model('Article',ArticleSchema);

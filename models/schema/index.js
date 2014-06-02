@@ -5,22 +5,23 @@
 var settings = require('../../settings');
 var mongoose = require('mongoose');
 
-mongoose.connect(settings.db,function(err){
-    if(err){
-        console.error('connect to %s error: ', settings.db, err.message);
-        process.exit(1);
-    }
+mongoose.connect(settings.db);
+
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'Connection Error:'));
+db.once('open',function callback(){
+    console.log("Connection OK");
 });
 
 //Schemas
-require('./articleSchema');
-require('./articleTagSchema');
-require('./tagSchema');
+require('./ArticleSchema');
+require('./MappingSchema');
+require('./TagSchema');
 
 
 
 //Exports Models
 
 exports.Article = mongoose.model('Article');
-exports.ArticleTag = mongoose.model('ArticleTag');
+exports.Mapping = mongoose.model('Mapping');
 exports.Tag = mongoose.model('Tag');
