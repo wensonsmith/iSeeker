@@ -21,7 +21,11 @@
                     <div class="metadata">
                         <i class="typcn typcn-calender"><span>{{friendlyDate}}</span></i>
                         <!--<i class="typcn typcn-message"><span>80</span></i>-->
-                        <i class="typcn typcn-tag"><span>{{tags}}</span></i>
+                        <i class="typcn typcn-tag">
+                            {{#tags}}
+                            <span>{{name}}</span>
+                            {{/tags}}
+                        </i>
                     </div>
                 </header>
                 <section class="section markdown">

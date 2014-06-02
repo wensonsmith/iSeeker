@@ -231,13 +231,16 @@ exports.list = function(req,res){
 
 exports.article = function(req,res){
 
-    var render = function(article){
+    var params = {};
+    var render = function(article,tags){
+        params.article = article;
+        params.tags = tags;
         Render.setTitle(article.title);
-        res.render('index/article',Render.setView({article:article}));
+        res.render('index/article',Render.setView(params));
     };
 
     var proxy = new EventProxy();
-    var events = ['article'];
+    var events = ['article','tags'];
     proxy.all(events,render);
 
     Article.getArticleById(req.params.id,proxy.done(function(article){
@@ -245,6 +248,8 @@ exports.article = function(req,res){
         article.content = MarkDown(article.content);
         proxy.emit('article', article);
     }));
+
+    Mapping.getPopulateMapping(req.params.id,proxy.done('tags'));
 };
 
 
