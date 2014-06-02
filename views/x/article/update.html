@@ -92,7 +92,7 @@
                     article.tags  = $("#article-tags").val();
                     article.time  = $("#article-time").val();
                     article.url   = $("#article-url").val();
-                    $.post('/x/api/article/update?id={{article._id}}',article);
+                    $.post('/api/article/update?id={{article._id}}',article);
                 })
             })
         })

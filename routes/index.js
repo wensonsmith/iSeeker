@@ -25,16 +25,17 @@ module.exports = function(app){
     app.get('/x/article/update/:id',WatchDog.Bark,Article.update);
     app.get('/x/article/list',WatchDog.Bark,Article.list);
 
-    app.post('/x/article/save',WatchDog.Bark,Article.save);
-    app.post('/x/article/update',WatchDog.Bark,Article.update);
+//    app.post('/x/article/save',WatchDog.Bark,Article.save);
+//    app.post('/x/article/update',WatchDog.Bark,Article.update);
 
     app.get('/articles/page/:page',Index.index);
-    app.get('/article/:id',Article.article)
+    app.get('/article/:id',Article.article);
 
 
 
     //API
-    app.get('/x/api/article/list',Article.api_list);
-    app.get('/x/api/article/delete',Article.api_delete);
-    app.post('/x/api/article/update',Article.api_update);
+    app.get('/api/article/list',Article._list);
+    app.get('/api/article/delete',Article._delete);
+    app.post('/api/article/add',Article._add);
+    app.post('/api/article/update',Article._update);
 }

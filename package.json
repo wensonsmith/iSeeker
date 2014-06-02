@@ -9,8 +9,8 @@
         "express": "3.4.4",
         "hogan-express": "*",
         "marked":"*",
-        "mongoose": "2.9.10",
-        "connect-mongo": "^0.4.0",
+        "mongoose": "*",
+        "connect-mongo": "*",
         "eventproxy":"*",
         "highlight.js":"*"
     }

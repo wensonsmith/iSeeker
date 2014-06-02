@@ -9,10 +9,10 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var ArticleTagSchema = new Schema({
+var MappingSchema = new Schema({
     article_id:{ type:ObjectId },
-    tag_id:{ type:ObjectId },
+    tag_id:{ type: ObjectId, ref: 'Tag' },
     create_at:{ type:String,default:Date }
-},{collection:'article_tag'});
+});
 
-mongoose.model('ArticleTag',ArticleTagSchema);
+mongoose.model('Mapping',MappingSchema);

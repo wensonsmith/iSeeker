@@ -45,7 +45,7 @@
     require(['main'],function(){
         require(['jquery'],function($){
             var contents = {};
-            $.get('/x/api/article/list',function(data){
+            $.get('/api/article/list',function(data){
                 contents = data.contents;
                 render_titles(data.titles);
             });
@@ -84,7 +84,7 @@
 
             $("#list-delete").click(function(){
                var id = $(this).attr('data-id');
-                $.get('/x/api/article/delete?id='+id,function(data){
+                $.get('/api/article/delete?id='+id,function(data){
                     if(data.status === 1){
                         var current_item = $(".list-item.active");
                         var nextItem = current_item.next();

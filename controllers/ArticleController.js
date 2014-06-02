@@ -13,9 +13,9 @@ MarkDown.setOptions({
     }
 });
 var Render = require('../Library/Utils/RenderHelper');
-var Article = require('../models/articleModel');
-var Tag = require('../models/tagModel');
-var ArticleTag = require('../models/articleTagModel');
+var Article = require('../models/ArticleModel');
+var Tag = require('../models/TagModel');
+var Mapping = require('../models/MappingModel');
 var EventProxy = require('eventproxy');
 
 /**
@@ -35,7 +35,7 @@ exports.add = function(req,res){
  * @param res
  * @param next
  */
-exports.save = function(req,res,next){
+exports._add = function(req,res,next){
 
     var post = req.body;
 
@@ -63,7 +63,7 @@ exports.save = function(req,res,next){
             //文章标签全部对应保存
             proxy.after('article_tag_saved',tags.length,function(){
                 proxy.emit('articles_tags_saved');
-            })
+            });
 
             tags.forEach(function(tagName){
                 Tag.getTagByName(tagName,function(err,tag){
@@ -74,14 +74,14 @@ exports.save = function(req,res,next){
                         //没有这个标签
                         Tag.add(tagName,function(err,_tag){
                             //保存文章和标签的对应关系
-                            ArticleTag.add(article._id,_tag._id,proxy.done('article_tag_saved'));
+                            Mapping.add(article._id,_tag._id,proxy.done('article_tag_saved'));
                             proxy.emit('tag_saved');
                         });
                     }else{
                         //标签文章数 +1
                         Tag.update(tag, tagName, tag.article_count+1, proxy.done('tag_saved'));
                         //保存文章和标签的对应关系
-                        ArticleTag.add(article._id,tag._id,proxy.done('article_tag_saved'));
+                        Mapping.add(article._id,tag._id,proxy.done('article_tag_saved'));
                     }
                 })
             })
@@ -115,7 +115,7 @@ exports.update = function(req,res){
  * @param req
  * @param res
  */
-exports.api_update = function(req,res){
+exports._update = function(req,res){
     var post = req.body;
     Article.getArticleById(req.query.id,function(err,article){
         article.title = post.title;
@@ -132,34 +132,31 @@ exports.api_update = function(req,res){
     });
 }
 
-exports.api_list = function(req,res){
-    var page = parseInt(req.query.page) || 1;
+exports._list = function(req,res){
     //每页11篇文章
+    var page = parseInt(req.query.page) || 1;
     var limit  = 11;
-    var skip   = (page-1)*limit;
-    var query  = {title: { $ne : '' }};
-    var options = {skip: skip, limit: limit, sort: [ [ 'create_at', 'desc' ] ]};
 
-    //开始渲染页面
-    var render = function(articles,pages){
-        articles.pages = pages;
+    var status = parseInt(req.query.status) || 1;
+
+    //返回json
+    var render = function(articles){
         res.json(articles);
     };
 
-    var events = ['articles','pages'];
+    var events = ['articles'];
     var proxy = new EventProxy();
     proxy.all(events,render);
 
-    Article.getArticlesByQuery(query,options,function(err,doc){
-        if(err){
-            console.log(err);
-        }
+    Article.getArticlesByPage(page,limit,status,function(err,docs){
         var titles = [];
         var contents = [];
         var result = {};
-        doc.forEach(function(value,index){
+        docs.forEach(function(value,index){
+            console.log(value);
             var title_item = {};
             title_item.title = value.title;
+            console.log(value.create_at);
             title_item.time  = Render.formatDate(value.create_at,true);
             titles.push(title_item);
 
@@ -172,32 +169,54 @@ exports.api_list = function(req,res){
         result.contents = contents;
         proxy.emit('articles',result);
     });
-
-    Article.getCountByQuery(query,proxy.done(function(count){
-        var all_pages = Math.ceil(count/limit);
-        var pages = {};
-        pages.all_pages = all_pages;
-        pages.current_page = page;
-//        var pages = [];
-//        for(i=1;i<=pagesCount;i++){
-//            var pageItem = {page:null,active:false};
-//            pageItem.page = i;
-//            if(page === i){
-//                pageItem.active = true;
-//            }
-//            pages.push(pageItem);
-//        }
-        proxy.emit('pages',pages);
-    }))
 };
 
-exports.api_delete = function(req,res){
-    var query = {_id:req.query.id};
-    Article.deleteArticleByQuery(query,function(err,num){
-        res.json({"status":1,"msg":num});
+/**
+ * 根据文章ID删除文章
+ * @param req
+ * @param res
+ */
+exports._delete = function(req,res){
+    var id = req.query.id;
+    var sendJson = function(){
+        res.json(makeJson(-1,'ArticleController/api_delete: ID 不能为空'));
+    };
+
+    var events = ['tags_deleted','mapping_deleted','article_deleted'];
+    var proxy = new EventProxy();
+    proxy.all(events,sendJson);
+
+    Article.deleteArticleById(id,function(err){
+        if(err){
+            console.log(err);
+        }
+        proxy.emit('article_deleted');
     });
 
+    //删除文章所有相关Tag
+    Mapping.getMappingByArticle(id,function(mappings){
+
+        proxy.after('tag_deleted',mappings.length,function(){
+            proxy.emit('tags_deleted');
+        });
+
+        mappings.forEach(function(value,index){
+            Tag.deleteTagById(value.tag_id,function(err){
+                if(err){
+                    console.log("Tag delete fail");
+                }else{
+                    proxy.emit('tag_deleted');
+                }
+            })
+        })
+    });
+
+    //删除mappings
+    Mapping.deleteMappingsByArticle(id,proxy.done('mapping_deleted'));
+
 };
+
+
 
 /**
  * 文章列表
@@ -226,4 +245,9 @@ exports.article = function(req,res){
         article.content = MarkDown(article.content);
         proxy.emit('article', article);
     }));
-}
+};
+
+
+var makeJson = function(status,msg){
+    return {"status":status,"msg":msg};
+};

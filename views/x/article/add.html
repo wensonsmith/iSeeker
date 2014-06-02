@@ -92,7 +92,7 @@
                 article.time  = $("#article-time").val();
                 article.url   = $("#article-url").val();
                 console.log(article);
-                $.post('/x/article/save',article);
+                $.post('/api/article/add',article);
             })
         })
     })

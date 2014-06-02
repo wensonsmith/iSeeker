@@ -13,52 +13,64 @@ MarkDown.setOptions({
     }
 });
 var Render = require('../Library/Utils/RenderHelper');
-var ArticleModel = require('../models/articleModel');
+var ArticleModel = require('../models/ArticleModel');
+var TagModel = require('../models/TagModel');
+var MappingModel = require('../models/MappingModel');
 var EventProxy = require('eventproxy');
 
-exports.index = function(req,res){
-    var page = parseInt(req.params.page, 10) || 1;
-    //每页11篇文章
-    var limit  = 11;
-    var skip   = (page-1)*limit;
-    var params = {};
-    var query  = {};
-    var options = {skip: skip, limit: limit, sort: [ [ 'create_at', 'desc' ] ]};
+var DELETE = -1, DRAFT = 0, PUBLISH = 1;
 
-    //开始渲染页面
-    var render = function(articles,pages){
+exports.index = function(req,res){
+    //文章分页，每页11篇文章
+    var page = parseInt(req.params.page, 10) || 1;
+    var limit  = 11;
+
+    var params = {};
+    //页面渲染函数
+    var render = function(articles,tags,pages){
+
+        articles.forEach(function(value,index){
+            articles[index]['friendlyDate']  = Render.formatDate(value.create_at,true);
+            articles[index]['content'] = MarkDown(value.content.split('<!--more-->')[0]);
+            articles[index]['tags'] = tags[value._id];
+
+            console.log(articles[index]['tags']);
+        });
+
         params.articles = articles;
         params.pages = pages;
         Render.setTitle("Wenson Smith")
         res.render('index/index',Render.setView(params));
     };
 
-    var events = ['articles','pages'];
+    var events = ['articles','tags','pages'];
     var proxy = new EventProxy();
     proxy.all(events,render);
 
-    ArticleModel.getArticlesByQuery(query,options,function(err,doc){
-        if(err){
-            console.log(err);
-        }
-        doc.forEach(function(value,index){
-            doc[index].set('friendlyDate', Render.formatDate(value.create_at,true));
-            doc[index].set('content',MarkDown(value.content.split('<!--more-->')[0]));
+    //根据页数获取文章
+    ArticleModel.getArticlesByPage(page,limit,PUBLISH,function(err,docs){
+
+        var allTags = {};
+        proxy.after('tag',docs.length,function(){
+            proxy.emit('tags',allTags);
         });
-        proxy.emit('articles',doc);
+
+        docs.forEach(function(value,index){
+//            docs[index].set('friendlyDate', Render.formatDate(value.create_at,true));
+//            docs[index].set('content',MarkDown(value.content.split('<!--more-->')[0]));
+
+            //获取Tags
+            MappingModel.getPopulateMapping(value._id,function(err,mapping){
+                allTags[value._id] = mapping;
+                proxy.emit('tag');
+            });
+        });
+        proxy.emit('articles',docs);
     });
 
-    ArticleModel.getCountByQuery(query,proxy.done(function(count){
-        var pagesCount = Math.ceil(count/limit);
-        var pages = [];
-        for(i=1;i<=pagesCount;i++){
-            var pageItem = {page:null,active:false};
-            pageItem.page = i;
-            if(page === i){
-                pageItem.active = true;
-            }
-            pages.push(pageItem);
-        }
+    //获取文章分页
+    ArticleModel.getArticlePages(page,limit,PUBLISH,function(pages){
         proxy.emit('pages',pages);
-    }))
+    });
+
 };

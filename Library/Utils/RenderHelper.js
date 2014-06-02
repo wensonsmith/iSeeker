@@ -73,3 +73,9 @@ var extend = function(o,n,override){
             o[p]=n[p];
     return o;
 };
+
+
+
+exports.merge = function(o,n){
+    return extend(o,n,true);
+};
