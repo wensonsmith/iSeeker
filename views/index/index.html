@@ -22,10 +22,10 @@
         <div  class="row">
             <article class="column">
                 <header>
-                    <div class="title"><a href="/article/{{_id}}" title="{{title}}">{{title}}</a></div>
+                    <div class="title"><a href="/article/{{_id}}#disqus_thread" title="{{title}}">{{title}}</a></div>
                     <div class="metadata">
                         <i class="typcn typcn-calender"><span>{{friendlyDate}}</span></i>
-                        <!--<i class="typcn typcn-message"><span>80</span></i>-->
+                        <i class="typcn typcn-message"><a href="/article/{{_id}}#disqus_thread">count</a></i>
                         <i class="typcn typcn-tag">
                             {{#tags}}
                             <span>{{name}}</span>
@@ -79,3 +79,18 @@
         </div>
     </footer>
 </div>
+
+{{#yield-script}}
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'seekbetterme'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+{{/yield-script}}
