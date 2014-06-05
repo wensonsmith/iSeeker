@@ -8,7 +8,7 @@
 /*********************************************************************************/
 
 body{
-    font-family:  "source-sans-pro",sans-serif;
+    font-family:  "Source Sans Pro",sans-serif;
     font-weight: 300;
     color: #333333;
 }
@@ -159,7 +159,7 @@ body{
 }
 
 .seeker-title{
-    font-family: "acta-poster-swashes",sans-serif;
+    font-family: 'Ceviche One', sans-serif;
     font-size: 3rem;
     margin-top:-0.3em;
     color: #666;
