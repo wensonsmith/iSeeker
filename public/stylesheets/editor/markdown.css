@@ -26,11 +26,11 @@
 }
 
 /*Markdown Style*/
-@import url(//fonts.googleapis.com/css?family=PT+Sans);
+/*@import url(//fonts.googleapis.com/css?family=PT+Sans);*/
 
-.markdown{
-    font-family: 'PT Sans', Helvetica, 'Helvetica Neuve', Arial, Tahoma, sans-serif;
-}
+/*.markdown{*/
+    /*font-family: 'PT Sans', Helvetica, 'Helvetica Neuve', Arial, Tahoma, sans-serif;*/
+/*}*/
 .markdown h1, h2, h3, h4, h5, h6 {
     color:#222;
     margin:0 0 20px;

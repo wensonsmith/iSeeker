@@ -22,3 +22,9 @@
     font-weight: 600;
     src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(https://themes.googleusercontent.com/static/fonts/sourcesanspro/v7/toadOcfmlt9b38dHJxOBGCmgpmuQqK2I-L2S9cF65Ek.woff) format('woff');
 }
+@font-face {
+    font-family: 'Ceviche One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ceviche One'), local('CevicheOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/cevicheone/v4/BQRygZwg3wyGCQXvKfUbSbrIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+}
