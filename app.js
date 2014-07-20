@@ -12,7 +12,6 @@ var MongoStore = require('connect-mongo')(express);
 var Settings = require('./settings');
 
 // all environments
-app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 
 //Enable Gzip compress
@@ -25,11 +24,14 @@ app.engine('html', require('hogan-express'));
 //app.set('partials', {header: "partials/header"});
 //app.enable('view cache')
 
-app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.cookieParser());
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.join(__dirname, 'public')));
+app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
 
 //Enable Session
 app.use(express.session({
@@ -40,19 +42,30 @@ app.use(express.session({
 }));
 
 
+//Environments
+app.configure('development', function(){
+    //some settings for your local development environment
+    app.set('port', 3000);
+    app.use(express.errorHandler());
+    console.log("development");
+})
+
+app.configure('production', function(){
+    //some different configuration for your live production environment
+    app.set('port', 80);
+    console.log("production");
+    app.get('/*', function(req, res, next) {
+		var host = req.header("host");
+		if (host.match(/^www\./)) {
+			next();
+		} else {
+			res.redirect(301, "http://www." + host);
+		}
+	});
+})
+
 app.use(app.router);
-//app.get(app.user);
 routes(app);
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/public',express.static(path.join(__dirname, 'public')));
-
-
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

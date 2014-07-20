@@ -150,6 +150,7 @@ body{
 
 .main{
     margin-left: 16%;
+    height: 100%;
 }
 
 
@@ -162,11 +163,11 @@ body{
     font-family: 'Ceviche One', sans-serif;
     font-size: 3rem;
     margin-top:-0.3em;
-    color: #666;
+    color: #FFF;
 }
 
 .seeker-subtitle{
-    color: #aaa;
+    color: #FFF;
     font-size: 1rem;
 }
 
@@ -177,8 +178,8 @@ body{
 
 .article{
     padding: 50px 8%;
-    box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.05), inset 0 0.1em 0.1em 0 rgba(0,0,0,0.025);
-    background-image: url('/public/images/overlay.png');
+    box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.05), inset 0 0.1em 0.1em 0 rgba(0,0,0,0.025);
+    /*background: url('/public/images/overlay.png') repeat 0 0;*/
 }
 
 .article .title{
@@ -207,8 +208,7 @@ body{
 /*********************************************************************************/
 
 .footer{
-    margin-top:50px;
-    background: url('/public/images/footerline.png') no-repeat center top;
-    padding: 30px;
+    background: url('/public/images/footerline.png') no-repeat center top #FFF;
+    padding:80px 30px 30px 30px;
     text-align: center;
 }
