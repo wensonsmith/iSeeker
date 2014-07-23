@@ -1,44 +1,58 @@
 <!-- sidebar -->
 {{> sidebar}}
 <style>
-    .SC{
-        height: 100%;
+    .parallax{
+        height: 80%;
         position: relative;
     }
 
-    #SCBackground{
+    .parallax .background{
         position: absolute;
         top: 0; left: 0;
         height: 100%;
         width: 100%;
-        z-index: -1;
-    }
+        z-index: -3;
+     }
 
-    #SCSlogan{
+    .parallax .foreground{
         position: absolute;
         top: 0;left: 0;
         width: 100%;
         height: 100%;
         z-index: -1;
         background-color: rgba(0,0,0,.3);
-        /*opacity: 0.3;*/
+    }
+
+    #canvasImage{
+        position: absolute;
+        left: 0;top:0;
+        opacity: 0;
+        /*display: none;*/
+    }
+
+    #canvas{
+        width: 100%;
+        position: absolute;
+        left: 0; top: 0;
+        opacity: 0;
     }
 
     #slogan{
         text-align: center;
         position: absolute;
-        top: 50%;
+        top: 60%;
         margin-top: -174px;
     }
 </style>
 <div class="main">
-    <div id="SC" class="SC">
-        <div id="SCBackground">
-            <!--<img id="canvasImage" src='/public/images/valle.jpg' style="height: 100%">-->
+    <div id="parallax" class="parallax">
+
+        <div id="background" class="background">
+            <img id="canvasImage" src='/public/images/valle.jpg'>
             <canvas id="canvas"></canvas>
         </div>
 
-        <div id="SCSlogan">
+        <div id="foreground" class="foreground">
             <section id="slogan" class="column">
                 <header>
                     <div>
@@ -124,71 +138,18 @@
 
 {{#yield-script}}
 <script type="text/javascript">
-    console.log("What");
     require(['main'],function(){
-        require(['jquery','modules/blur/CanvasBlur'],function($,CanvasBlur){
+        require(['jquery','blur','modules/parallax/Parallax','modules/imagefull/ImageFull'],function($, Blur, Parallax,ImageFull){
+            ImageFull.imageFull('parallax','canvasImage',parallax);
 
-            var scale_x = $("#SC").width();
-            var scale_y = $("#SC").height();
-            var cImg = new Image();
-            var aaa = null;
-            cImg.src = '/public/images/valle.jpg';
-            cImg.onload =function(){
-                CanvasBlur.CanvasBlur(document.getElementById('canvas'),this,1,scale_x,scale_y);
-            };
-
-            var SCBackground = document.getElementById('SCBackground');
-            SCSlogan = document.getElementById('SCSlogan');
-            var oTop_1 = 0,
-                oTop_2 = 0;
-
-            addEvent(window,'scroll',onScroll);
-//            onScroll();
-            var compare = {a:true,b:true};
-            function onScroll(e){
-                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                SCBackground.style.top = oTop_1+scrollTop*.9+'px';
-                SCSlogan.style.top = oTop_2+scrollTop*.7+'px';
-
-                if(scrollTop < 100 && scrollTop > 0 && compare.a){
-                    CanvasBlur.CanvasBlur(document.getElementById('canvas'),cImg,2,scale_x,scale_y);
-                    compare.a = false;
-                }
-
-                if(scrollTop > 100 && compare.b){
-                    CanvasBlur.CanvasBlur(document.getElementById('canvas'),cImg,4,scale_x,scale_y);
-                    compare.b = false;
-                    compare.a = true;
-                }
-
-                if(scrollTop == 0){
-                    CanvasBlur.CanvasBlur(document.getElementById('canvas'),cImg,0,scale_x,scale_y);
-                    compare.a = true;
-                    compare.b = true;
-                }
-//                var blurParam = parseInt(scrollTop/100);
-//                console.log(scrollTop);
-////                console.log(blurParam);
-//                if(blurParam != compare){
-//                    CanvasBlur.CanvasBlur(document.getElementById('canvas'),cImg,blurParam,scale_x,scale_y);
-//                    compare = blurParam;
-//                    console.log("渲染一次");
-//                }
+            function parallax(){
+                Blur.stackBoxBlurImage('canvasImage','canvas',10,true,2);
+                Parallax.parallax('background','foreground',false,blurCallback);
             }
 
-            function addEvent(eventTarget, eventType, eventHandler) {
-                if (eventTarget.addEventListener) {
-                    eventTarget.addEventListener(eventType, eventHandler, false);
-                } else {
-                    if (eventTarget.attachEvent) {
-                        eventType = "on" + eventType;
-                        eventTarget.attachEvent(eventType, eventHandler);
-                    } else {
-                        eventTarget["on" + eventType] = eventHandler;
-                    }
-                }
+            function blurCallback(opacityDegree){
+                $("#canvas").css("opacity",opacityDegree);
             }
-
         });
     });
 </script>

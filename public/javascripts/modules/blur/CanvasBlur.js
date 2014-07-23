@@ -8,8 +8,8 @@
 define(function(){
 
     var CanvasImage = function(cav,img) {
-        this.canvas = cav;
-        this.image = img;
+        this.canvas = document.getElementById(cav);
+        this.image = document.getElementById(img);
 
         this.canvas.width = this.image.width;
         this.canvas.height = this.image.height;
@@ -41,10 +41,10 @@ define(function(){
         this.canvas.style.setProperty("height",height+"px","");
     };
 
-    var CanvasBlur = function(canvas,image,blur,width,height){
+    var CanvasBlur = function(canvas,image,blur){
         var CanvasImg = new CanvasImage(canvas,image);
         CanvasImg.blur(blur);
-        CanvasImg.scale(width,height);
+//        CanvasImg.scale(width,height);
     };
 
     return {

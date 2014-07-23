@@ -17,7 +17,8 @@ requirejs.config({
         gfm:        'components/codemirror/mode/gfm/gfm',
         modernizr:  'components/modernizr/modernizr',
         foundation: 'components/foundation/foundation.min',
-        highlight:  'components/highlight/highlight.pack'
+        highlight:  'components/highlight/highlight.pack',
+        blur:       'components/stackblur/StackBoxBlur'
     },
     map:{
       '*':{
