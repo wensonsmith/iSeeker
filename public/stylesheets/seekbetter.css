@@ -201,8 +201,130 @@ body{
     font-style: normal;
 }
 
+/*********************************************************************************/
+/* Wenson Smith                                                                       */
+/*********************************************************************************/
+
+.row .columns.left{
+    padding: 50px 35px;
+}
+
+.logo .mylogo{
+    width: 64px;
+    float: left;
+}
+.logo .myname{
+    font-size: 30px;
+    color: #474D50;
+    float: left;
+    margin:5px 20px
+}
+
+.contact{
+    margin-top: 120px;
+    color: #8F99A1;
+    font-weight: lighter;
+    line-height: 40px;
+}
+.contact li span{
+    color: #474D50;
+    font-weight: bold;
+    width: 60px;
+    display: inline-block
+}
+.introduction{
+    color: #8E9AA1;
+    line-height: 20px;
+    margin-top: 130px;
+}
+
+.introduction span{
+    color: #474D50;
+    font-weight: bold;
+}
+
+.tags span{
+    padding: 3px 8px;
+    display: inline-block;
+    margin: 5px 10px;
+    color: #ffffff;
+    background-color: #3A3B40;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.tags span.blue{
+    color: #66D3D9;
+}
+.tags span.red{
+    color: #A85D8E;
+}
+.tags span.yellow{
+    color: #EAC168;
+}
+.tags span.green{
+    color: #65CE9B;
+}
+
+.tags span.interest{
+    font-size: 16px;
+}
+.tags span.like{
+    font-size: 18px;
+}
+.tags span.love{
+    font-size: 22px
+}
 
 
+
+
+.row .columns.right{
+    background-color: #3A3B40;
+    padding: 60px 35px;
+    height: 800px;
+}
+
+.right .caption{
+    color: #83F5FA;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.right .title{
+    color: #FFFFFF;
+    margin-bottom:15px;
+    font-size: 12px;
+}
+
+.right .description, .right .skill{
+    color: #A9A7A3;
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 25px;
+}
+
+.right .skill .bar{
+    background-color: #252629;
+}
+
+.right .skill .score{
+    height: 6px;
+}
+
+.right .skill .score.blue{
+    background-color: #66D3D9;
+}
+.right .skill .score.red{
+    background-color: #A85D8E;
+}
+.right .skill .score.green{
+    background-color: #65CE9B;
+}
+.right .skill .score.yellow{
+    background-color: #EAC168;
+}
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
