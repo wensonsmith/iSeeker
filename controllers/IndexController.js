@@ -74,3 +74,9 @@ exports.index = function(req,res){
     });
 
 };
+
+exports.timemachine = function(req,res){
+    var params = {};
+    Render.setTitle("时光机")
+    res.render('index/timemachine',Render.setView(params));
+};

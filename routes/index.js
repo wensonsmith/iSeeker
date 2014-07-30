@@ -14,6 +14,7 @@ var WatchDog = require('../Library/Utils/WatchDog');
 module.exports = function(app){
     app.get('/',Index.index);
     app.get('/wensonsmith',User.wensonsmith);
+    app.get('/timemachine',Index.timemachine);
     app.get('/x',X.index);
     app.get('/x/door',X.index);
     app.post('/x/unlock',X.unlock);
